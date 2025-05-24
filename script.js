@@ -245,7 +245,7 @@ document.getElementById("contadorBanners").textContent =
       barra.setAttribute("aria-valuenow", "0");
     }
   
-    mostrarToast("🧹 Campos limpiados", "info");
+    mostrarToast("🧹 Campos limpiados", "success");
   }
   
 
