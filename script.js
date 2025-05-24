@@ -46,13 +46,35 @@ function sugerenciasBannerSimple(valor) {
     const item = document.createElement("div");
     item.className = "suggestion-item";
     item.textContent = b.nombre;
+  
     item.onclick = () => {
-      document.getElementById("buscarBanner").value = b.nombre;
+      const input = document.getElementById("buscarBanner");
+  
+      // ✅ Limpia y reemplaza con el nuevo nombre
+      input.value = "";
+      setTimeout(() => {
+        input.value = b.nombre;
+      }, 10);
+  
+      // ✅ Agrega el banner
       generarBannerDesdeJson(b);
+  
+      // ✅ Cierra las sugerencias
       box.classList.add("d-none");
+  
+      // ✅ Estilo visual UX (borde verde)
+      input.classList.add("border-success");
+      setTimeout(() => input.classList.remove("border-success"), 1000);
+  
+      // ✅ Toast (opcional)
+      if (typeof mostrarToast === "function") {
+        mostrarToast(`✅ Banner "${b.nombre}" agregado`, "success");
+      }
     };
+  
     box.appendChild(item);
   });
+  
 }
 
 function generarBannerDesdeJson(banner) {
@@ -101,7 +123,7 @@ ${tablaHTML}
 
   // Mensaje al usuario
   if (bannersSeleccionados.length === cantidadMaxima) {
-    mostrarToast("✅ Ya seleccionaste todos los banners", "success");
+    // mostrarToast("✅ Ya seleccionaste todos los banners", "success");
   } else {
     const restantes = cantidadMaxima - bannersSeleccionados.length;
     mostrarToast(`⚠️ Banner agregado. Faltan ${restantes}`, 'warning');
@@ -224,5 +246,35 @@ document.getElementById("contadorBanners").textContent =
     }
   
     mostrarToast("🧹 Campos limpiados", "info");
+  }
+  
+
+  function activarBotonLimpiar() {
+    const input = document.getElementById("buscarBanner");
+    const btn = document.getElementById("btnClearInput");
+  
+    if (input.value.length > 0) {
+      btn.classList.remove("d-none");
+    }
+  
+    input.addEventListener("input", () => {
+      if (input.value.length > 0) {
+        btn.classList.remove("d-none");
+      } else {
+        btn.classList.add("d-none");
+      }
+    });
+  }
+  
+  function limpiarInputBuscar() {
+    const input = document.getElementById("buscarBanner");
+    const btn = document.getElementById("btnClearInput");
+  
+    input.value = "";
+    btn.classList.add("d-none");
+  
+    // Cerrar sugerencias también
+    const box = document.getElementById("sugerencias-banner");
+    if (box) box.classList.add("d-none");
   }
   

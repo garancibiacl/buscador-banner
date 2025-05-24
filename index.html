@@ -69,7 +69,17 @@
 </head>
 <body class="bg-dark text-light">
   <div class="container  py-5">
+    <div class="row">
+<div class="col-10">
     <h1 class="mb-4">🧠 Buscar Banner y Generar HTML </h1>
+  </div>
+    <div class="col-2">
+    <button onclick="limpiarCamposBanner()" class="btn btn-outline-light mt-3 mb-3 ms-2">
+      🧹 Limpiar todo
+    </button> 
+    </div>
+  </div>
+  <br>
     <div class="row bg-secondary p-4 rounded">
       <div class="col-3">
     <div class="mb-3">
@@ -86,14 +96,23 @@
   <div class="col-9">
     <div class="position-relative mb-4">
       <label class="form-label">Buscar banners:</label>
-      <input type="text" id="buscarBanner" class="form-control"
-             placeholder="Buscar banner..." oninput="sugerenciasBannerSimple(this.value)">
+      <input type="text" id="buscarBanner" class="form-control pe-5"
+             placeholder="Buscar banner..."
+             oninput="sugerenciasBannerSimple(this.value); activarBotonLimpiar()"
+             onclick="activarBotonLimpiar()">
+    
+      <button id="btnClearInput"
+              class="btn btn-sm  position-absolute top-50 end-0 mt-3 translate-middle-y me-2 d-none"
+              onclick="limpiarInputBuscar()" type="button">❌</button>
+    
       <div id="sugerencias-banner" class="suggestion-box d-none"></div>
     </div>
+    
+
 
   </div>
    
-    <div class="col-7">
+    <div class="col-8">
     <div class="card card-dark">
       <div class="card-body">
         <h5 class="card-title">🖼️ Vista previa</h5>
@@ -105,14 +124,12 @@
 
   </div>
 
-  <div class="col-5 card card-dark">
+  <div class="col-4 card card-dark">
 
     <h5 class="card-title mt-3">Código HTML AMPscript:</h5>
     <textarea id="codigoGenerado" class="form-control" rows="8" readonly></textarea>
-    <button onclick="copiarCodigo()" class="btn btn-outline-light mt-3 mb-3">📋 Copiar HTML</button>
-    <button onclick="limpiarCamposBanner()" class="btn btn-outline-warning mt-3 mb-3 ms-2">
-      🧹 Limpiar todo
-    </button>
+    <button onclick="copiarCodigo()" class="btn btn-primary mt-3 mb-3">📋 Copiar HTML</button>
+
   </div>
 
 
