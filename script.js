@@ -207,3 +207,22 @@ document.getElementById("contadorBanners").textContent =
     setTimeout(() => toast.remove(), 3500);
   }
   
+
+  function limpiarCamposBanner() {
+    bannersSeleccionados = [];
+    document.getElementById("buscarBanner").value = "";
+    document.getElementById("previewHTML").innerHTML = "";
+    document.getElementById("codigoGenerado").value = "";
+  
+    const contador = document.getElementById("contadorBanners");
+    if (contador) contador.textContent = `0 de ${cantidadMaxima} banners agregados`;
+  
+    const barra = document.getElementById("barraProgreso");
+    if (barra) {
+      barra.style.width = `0%`;
+      barra.setAttribute("aria-valuenow", "0");
+    }
+  
+    mostrarToast("🧹 Campos limpiados", "info");
+  }
+  
