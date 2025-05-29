@@ -136,6 +136,9 @@ const filaPreview = `
 </tr>`;
 contenedor.querySelector("table").insertAdjacentHTML("beforeend", filaPreview);
 
+  // ✅ Mostrar toast con nombre del banner
+  mostrarToast(`🎯 Seleccionaste: <strong>${banner.nombre}</strong>`, "success");
+actualizarContador(); // ← esta dentro de la función causa un loop infinito
   generarHTMLTabla();
 }
 
@@ -211,10 +214,30 @@ function copiarCodigo() {
 
 function actualizarContador() {
   const contador = document.getElementById("contadorBanners");
-  if (contador) {
-    contador.textContent = `${bannersSeleccionados.length} de ${cantidadMaxima} banners agregados`;
+  const total = bannersSeleccionados.length;
+
+  if (!contador) {
+    console.warn("⚠️ No se encontró el elemento #contadorBanners");
+    return;
   }
+
+  // 🧠 Texto dinámico sin máximo
+  contador.textContent = `${total} banner${total !== 1 ? 's' : ''} agregados 🎯`;
+
+  // 🎨 Visual style
+  contador.className = `badge px-3 py-2 rounded-pill text-dark ${
+    total === cantidadMaxima ? 'bg-warning' : 'bg-warning'
+  }`;
+
+  // ✨ Animación sutil
+  contador.classList.add("animate__animated", "animate__bounceIn");
+  setTimeout(() => contador.classList.remove("animate__animated", "animate__bounceIn"), 600);
+
+
 }
+
+
+
 
 
 
@@ -234,6 +257,9 @@ function limpiarCamposBanner() {
   }
 
   mostrarToast("🧹 Campos limpiados", "success");
+
+  actualizarContador(); // ← al resetear también
+
 }
 
 
@@ -285,3 +311,13 @@ function mostrarToast(mensaje, tipo = 'success') {
   toastContainer.appendChild(toast);
   setTimeout(() => toast.remove(), 3500);
 }
+
+
+window.addEventListener("DOMContentLoaded", async () => {
+  bannersJSON = await cargarBannersJson();
+  console.log("📦 bannersJSON combinado:", bannersJSON);
+
+  const loader = document.getElementById("loaderOverlay");
+  loader.classList.add("hidden");
+  setTimeout(() => loader.remove(), 400);
+});
