@@ -148,7 +148,7 @@ function generarBannerDesdeJson(banner) {
   contenedor.querySelector("table").insertAdjacentHTML("beforeend", filaPreview);
 
   // ✅ Mostrar toast con nombre del banner
-  mostrarToast(`🎯 Seleccionaste: <strong>${banner.nombre}</strong>`, "success");
+  mostrarToast(`🎯 Seleccionaste: <strong>${banner.nombre}</strong>`, "purple-toast");
 
   // ✅ Actualiza el contador visual
   actualizarContador();
@@ -246,8 +246,8 @@ function actualizarContador() {
   contador.textContent = `${total} banner${total !== 1 ? 's' : ''} agregados 🎯`;
 
   // 🎨 Visual style
-  contador.className = `badge px-3 py-2 rounded-pill text-dark ${
-    total === cantidadMaxima ? 'bg-warning' : 'bg-warning'
+  contador.className = `glass-badge px-3 py-2 rounded-pill  ${
+    total === cantidadMaxima ? 'glass-badge' : 'glass-badge'
   }`;
 
   // ✨ Animación sutil
@@ -315,7 +315,7 @@ function limpiarInputBuscar() {
 
 
 
-function mostrarToast(mensaje, tipo = 'success') {
+function mostrarToast(mensaje, tipo = 'purple-toast') {
   const toastContainer = document.getElementById("toastContainer");
   if (!toastContainer) return console.warn("⚠️ toastContainer no existe");
 
@@ -334,11 +334,13 @@ function mostrarToast(mensaje, tipo = 'success') {
 }
 
 
-window.addEventListener("DOMContentLoaded", async () => {
-  bannersJSON = await cargarBannersJson();
-  console.log("📦 bannersJSON combinado:", bannersJSON);
 
+
+window.addEventListener("DOMContentLoaded", async () => {
   const loader = document.getElementById("loaderOverlay");
-  loader.classList.add("hidden");
-  setTimeout(() => loader.remove(), 400);
+  bannersJSON = await cargarBannersJson();
+
+  loader.style.opacity = "0";
+  setTimeout(() => loader.remove(), 200);
 });
+
