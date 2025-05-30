@@ -113,34 +113,50 @@ function sugerenciasBannerSimple(valor) {
 
 function generarBannerDesdeJson(banner) {
   bannersSeleccionados.push({ ...banner });
+
   const contenedor = document.getElementById("previewHTML");
   if (!contenedor.querySelector("table")) {
     contenedor.innerHTML = '<table width="600" cellspacing="0" cellpadding="0" align="center"></table>';
   }
+
   const index = bannersSeleccionados.length - 1;
-// 🧠 Vista previa con botón "Editar"
-const filaPreview = `
+  const esHuincha = !banner.href?.trim();
+
+  const contenido = esHuincha
+    ? `<img src="${banner.img_src}" alt="${banner.alt}" style="display:block;" border="0">`
+    : `<a href="${banner.href}" target="_blank">
+         <img src="${banner.img_src}" alt="${banner.alt}" style="display:block;" border="0">
+       </a>`;
+
+  const botonEditar = `
+    <div class="mt-2 d-flex justify-content-end">
+      <button class="btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+              onclick="abrirModalEditar(${index})"
+              style="font-size: 0.85rem;">
+        <i class="bx bx-edit-alt bx-xs"></i> Editar
+      </button>
+    </div>`;
+
+  const filaPreview = `
 <tr>
   <td colspan="2" align="center">
-    <a href="${banner.href}" target="_blank">
-      <img src="${banner.img_src}" alt="${banner.alt}" style="display:block;" border="0">
-    </a>
- <div class="mt-2 d-flex justify-content-end">
-  <button class="btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
-          onclick="abrirModalEditar(${index})"
-          style="font-size: 0.85rem;">
-    <i class="bx bx-edit-alt bx-xs"></i> Editar
-  </button>
-</div>
+    ${contenido}
+    ${botonEditar}
   </td>
 </tr>`;
-contenedor.querySelector("table").insertAdjacentHTML("beforeend", filaPreview);
+
+  contenedor.querySelector("table").insertAdjacentHTML("beforeend", filaPreview);
 
   // ✅ Mostrar toast con nombre del banner
   mostrarToast(`🎯 Seleccionaste: <strong>${banner.nombre}</strong>`, "success");
-actualizarContador(); // ← esta dentro de la función causa un loop infinito
+
+  // ✅ Actualiza el contador visual
+  actualizarContador();
+
+  // ✅ Genera tabla limpia final
   generarHTMLTabla();
 }
+
 
 function abrirModalEditar(index) {
   const banner = bannersSeleccionados[index];
@@ -183,27 +199,32 @@ function guardarCambiosBanner() {
 
 
 function generarHTMLTabla() {
-// ✅ Generar tabla limpia sin botones
-const tablaHTML = bannersSeleccionados.map(b => `
-  <tr>
-    <td colspan="2" align="center">
-      <a href="${b.href}" target="_blank">
-        <img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">
-      </a>
-    </td>
-  </tr>`).join("");
-  
+  const tablaHTML = bannersSeleccionados.map(b => {
+    const esHuincha = !b.href?.trim();
+    const contenido = esHuincha
+      ? `<img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">`
+      : `<a href="${b.href}" target="_blank">
+           <img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">
+         </a>`;
+    return `
+    <tr>
+      <td colspan="2" align="center">
+        ${contenido}
+      </td>
+    </tr>`;
+  }).join("");
+
   const tablaFinal = `
   <table width="600" cellspacing="0" cellpadding="0" align="center">
   ${tablaHTML}
   </table>`.trim();
-  
+
   document.getElementById("codigoGenerado").value = tablaFinal;
-  
 
-  document.getElementById("previewHTML").innerHTML = tablaCompleta;
-
+  // ❌ No reemplazar vista previa visual aquí
+  // document.getElementById("previewHTML").innerHTML = tablaFinal;
 }
+
 
 function copiarCodigo() {
   const area = document.getElementById("codigoGenerado");
