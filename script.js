@@ -101,9 +101,9 @@ function sugerenciasBannerSimple(valor) {
       setTimeout(() => input.classList.remove("border-success"), 1000);
 
       // Toast
-      if (typeof mostrarToast === "function") {
+    /*if (typeof mostrarToast === "function") {
         mostrarToast(`✅ Banner "${b.nombre}" agregado`, "success");
-      }
+      }*/
     };
 
     box.appendChild(item);
