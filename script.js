@@ -1,4 +1,12 @@
 
+  // Inicializar todos los tooltips
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+    new bootstrap.Tooltip(el, {
+      customClass: 'tooltip-dark'
+    });
+  });
+
+
 let bannersJSON = [];
 let cantidadMaxima = 1;
 let bannersSeleccionados = [];
@@ -130,10 +138,10 @@ function generarBannerDesdeJson(banner) {
 
   const botonEditar = `
     <div class="mt-2 d-flex justify-content-end">
-      <button class="btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+      <button class="tooltip-btn btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1 "
               onclick="abrirModalEditar(${index})"
-              style="font-size: 0.85rem;">
-        <i class="bx bx-edit-alt bx-xs"></i> Editar
+              style="font-size: 0.85rem;"  >
+        <i class="bx bx-edit-alt bx-xs "></i> Editar  <span class="tooltip-text">Editar banner</span>
       </button>
     </div>`;
 
@@ -265,12 +273,22 @@ function actualizarContador() {
 function limpiarCamposBanner() {
   bannersSeleccionados = [];
   document.getElementById("buscarBanner").value = "";
-  document.getElementById("previewHTML").innerHTML = "";
   document.getElementById("codigoGenerado").value = "";
 
+  // 🧹 Restaurar imagen de espera en previewHTML
+  document.getElementById("previewHTML").innerHTML = `
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+    <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
+    <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+  </div>
+`;
+
+
+  // Reset contador
   const contador = document.getElementById("contadorBanners");
   if (contador) contador.textContent = `0 de ${cantidadMaxima} banners agregados`;
 
+  // Reset barra de progreso
   const barra = document.getElementById("barraProgreso");
   if (barra) {
     barra.style.width = `0%`;
@@ -279,9 +297,9 @@ function limpiarCamposBanner() {
 
   mostrarToast("🧹 Campos limpiados", "success");
 
-  actualizarContador(); // ← al resetear también
-
+  actualizarContador(); // ← También resetea internamente
 }
+
 
 
 function activarBotonLimpiar() {
@@ -338,9 +356,39 @@ function mostrarToast(mensaje, tipo = 'purple-toast') {
 
 window.addEventListener("DOMContentLoaded", async () => {
   const loader = document.getElementById("loaderOverlay");
-  bannersJSON = await cargarBannersJson();
 
+
+
+  // Apagar loader visualmente con transición suave
+  loader.style.transition = "opacity 0.3s ease";
   loader.style.opacity = "0";
-  setTimeout(() => loader.remove(), 200);
+
+  // Eliminar del DOM rápidamente
+  setTimeout(() => loader.remove(), 100); // 300ms = consistente con transición
 });
+
+
+function mostrarBannerEnPreview(htmlDelBanner) {
+  const contenedor = document.getElementById("previewHTML");
+  const imagenEspera = document.getElementById("imagenEspera");
+
+  // Elimina imagen si existe
+  if (imagenEspera) imagenEspera.remove();
+
+  // Inserta el banner
+  contenedor.innerHTML += htmlDelBanner;
+
+  // Baja el scroll al final si se agregó algo nuevo
+  contenedor.scrollTop = contenedor.scrollHeight;
+}
+
+function limpiarPreviewHTML() {
+  const contenedor = document.getElementById("previewHTML");
+  contenedor.innerHTML = `
+    <img id="imagenEspera" src="https://i.imgur.com/Q1qVbSQ.png" alt="Esperando contenido"
+         class="mx-auto d-block img-fluid opacity-50" style="max-width: 180px;">
+  `;
+}
+
+
 
