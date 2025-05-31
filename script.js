@@ -124,7 +124,7 @@ function generarBannerDesdeJson(banner) {
 
   const contenedor = document.getElementById("previewHTML");
   if (!contenedor.querySelector("table")) {
-    contenedor.innerHTML = '<table width="600" cellspacing="0" cellpadding="0" align="center"></table>';
+    contenedor.innerHTML = '<table width="600" cellspacing="0" cellpadding="0" align="center" id="tablaPreview"></table>';
   }
 
   const index = bannersSeleccionados.length - 1;
@@ -137,16 +137,26 @@ function generarBannerDesdeJson(banner) {
        </a>`;
 
   const botonEditar = `
-    <div class="mt-2 d-flex justify-content-end">
-      <button class="tooltip-btn btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1 "
+    <div class="mt-2 d-flex justify-content-end gap-2">
+
+      <button class="tooltip-btn btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
               onclick="abrirModalEditar(${index})"
-              style="font-size: 0.85rem;"  >
-        <i class="bx bx-edit-alt bx-xs "></i> Editar  <span class="tooltip-text">Editar banner</span>
+              style="font-size: 0.85rem;">
+        <i class="bx bx-edit-alt bx-xs"></i> Editar
+        <span class="tooltip-text">Editar banner</span>
       </button>
+
+      <button class="tooltip-btn btn btn-danger btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+              onclick="eliminarBanner(${index}, this)"
+              style="font-size: 0.85rem;">
+        <i class="bx bx-trash bx-xs"></i> Eliminar
+        <span class="tooltip-text">Eliminar banner</span>
+      </button>
+
     </div>`;
 
   const filaPreview = `
-<tr>
+<tr id="fila-banner-${index}">
   <td colspan="2" align="center">
     ${contenido}
     ${botonEditar}
@@ -155,13 +165,32 @@ function generarBannerDesdeJson(banner) {
 
   contenedor.querySelector("table").insertAdjacentHTML("beforeend", filaPreview);
 
-  // ✅ Mostrar toast con nombre del banner
   mostrarToast(`🎯 Seleccionaste: <strong>${banner.nombre}</strong>`, "purple-toast");
-
-  // ✅ Actualiza el contador visual
   actualizarContador();
+  generarHTMLTabla();
+}
 
-  // ✅ Genera tabla limpia final
+
+function eliminarBanner(index, boton) {
+  // Eliminar la fila visualmente del DOM
+  const fila = document.getElementById(`fila-banner-${index}`);
+  if (fila) fila.remove();
+
+  // Eliminar del array
+  bannersSeleccionados.splice(index, 1);
+
+  // Si ya no hay banners, mostrar imagen/estado de espera
+  const tabla = document.getElementById("tablaPreview");
+  if (!tabla || tabla.rows.length === 0) {
+    document.getElementById("previewHTML").innerHTML = `
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+    <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
+    <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+  </div>`;
+  }
+
+  mostrarToast("🗑️ Banner eliminado", "danger");
+  actualizarContador();
   generarHTMLTabla();
 }
 
