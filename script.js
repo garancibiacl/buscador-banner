@@ -1,7 +1,16 @@
+// Inicializar todos los tooltips
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+    new bootstrap.Tooltip(el, {
+      customClass: 'tooltip-dark'
+    });
+  });
 
-let bannersJSON = [];
+
+
 let cantidadMaxima = 1;
 let bannersSeleccionados = [];
+
+
 
 /*async function cargarBannersJson() {
   try {
@@ -21,7 +30,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 });*/
 
 async function cargarBannersJson() {
-  const urls = ['assets/banners.json', 'assets/banners-cyber.json']; // <- ambas fuentes
+  const urls = ['backend/data/banners.json', 'backend/data/cyber-banner.json']; // <- ambas fuentes
   let resultado = [];
 
   for (const url of urls) {
@@ -40,8 +49,14 @@ async function cargarBannersJson() {
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
-  bannersJSON = await cargarBannersJson();
-  console.log("📦 bannersJSON combinado:", bannersJSON);
+  bannersJSON = await cargarBannersJson("banners.json");
+  cyberBannersJSON = await cargarBannersJson("cyber-banner.json");
+
+  renderizarBanners(bannersJSON, '#listaBanners');
+  renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
+
+  console.log("📦 banners cargados:", bannersJSON);
+  console.log("📦 cyber cargados:", cyberBannersJSON);
 });
 
 
@@ -101,9 +116,9 @@ function sugerenciasBannerSimple(valor) {
       setTimeout(() => input.classList.remove("border-success"), 1000);
 
       // Toast
-      if (typeof mostrarToast === "function") {
+    /*if (typeof mostrarToast === "function") {
         mostrarToast(`✅ Banner "${b.nombre}" agregado`, "success");
-      }
+      }*/
     };
 
     box.appendChild(item);
@@ -113,34 +128,79 @@ function sugerenciasBannerSimple(valor) {
 
 function generarBannerDesdeJson(banner) {
   bannersSeleccionados.push({ ...banner });
+
   const contenedor = document.getElementById("previewHTML");
   if (!contenedor.querySelector("table")) {
-    contenedor.innerHTML = '<table width="600" cellspacing="0" cellpadding="0" align="center"></table>';
+    contenedor.innerHTML = '<table width="600" cellspacing="0" cellpadding="0" align="center" id="tablaPreview"></table>';
   }
+
   const index = bannersSeleccionados.length - 1;
-// 🧠 Vista previa con botón "Editar"
-const filaPreview = `
-<tr>
+  const esHuincha = !banner.href?.trim();
+
+  const contenido = esHuincha
+    ? `<img src="${banner.img_src}" alt="${banner.alt}" style="display:block;" border="0">`
+    : `<a href="${banner.href}" target="_blank">
+         <img src="${banner.img_src}" alt="${banner.alt}" style="display:block;" border="0">
+       </a>`;
+
+  const botonEditar = `
+    <div class="mt-2 d-flex justify-content-end gap-2">
+
+      <button class="tooltip-btn btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+              onclick="abrirModalEditar(${index})"
+              style="font-size: 0.85rem;">
+        <i class="bx bx-edit-alt bx-xs"></i> Editar
+        <span class="tooltip-text">Editar banner</span>
+      </button>
+
+      <button class="tooltip-btn btn btn-danger btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+              onclick="eliminarBanner(${index}, this)"
+              style="font-size: 0.85rem;">
+        <i class="bx bx-trash bx-xs"></i> Eliminar
+        <span class="tooltip-text">Eliminar banner</span>
+      </button>
+
+    </div>`;
+
+  const filaPreview = `
+<tr id="fila-banner-${index}">
   <td colspan="2" align="center">
-    <a href="${banner.href}" target="_blank">
-      <img src="${banner.img_src}" alt="${banner.alt}" style="display:block;" border="0">
-    </a>
- <div class="mt-2 d-flex justify-content-end">
-  <button class="btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
-          onclick="abrirModalEditar(${index})"
-          style="font-size: 0.85rem;">
-    <i class="bx bx-edit-alt bx-xs"></i> Editar
-  </button>
-</div>
+    ${contenido}
+    ${botonEditar}
   </td>
 </tr>`;
-contenedor.querySelector("table").insertAdjacentHTML("beforeend", filaPreview);
 
-  // ✅ Mostrar toast con nombre del banner
-  mostrarToast(`🎯 Seleccionaste: <strong>${banner.nombre}</strong>`, "success");
-actualizarContador(); // ← esta dentro de la función causa un loop infinito
+  contenedor.querySelector("table").insertAdjacentHTML("beforeend", filaPreview);
+
+  mostrarToast(`🎯 Seleccionaste: <strong>${banner.nombre}</strong>`, "purple-toast");
+  actualizarContador();
   generarHTMLTabla();
 }
+
+
+function eliminarBanner(index, boton) {
+  // Eliminar la fila visualmente del DOM
+  const fila = document.getElementById(`fila-banner-${index}`);
+  if (fila) fila.remove();
+
+  // Eliminar del array
+  bannersSeleccionados.splice(index, 1);
+
+  // Si ya no hay banners, mostrar imagen/estado de espera
+  const tabla = document.getElementById("tablaPreview");
+  if (!tabla || tabla.rows.length === 0) {
+    document.getElementById("previewHTML").innerHTML = `
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+    <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
+    <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+  </div>`;
+  }
+
+  mostrarToast("🗑️ Banner eliminado", "danger");
+  actualizarContador();
+  generarHTMLTabla();
+}
+
 
 function abrirModalEditar(index) {
   const banner = bannersSeleccionados[index];
@@ -183,27 +243,32 @@ function guardarCambiosBanner() {
 
 
 function generarHTMLTabla() {
-// ✅ Generar tabla limpia sin botones
-const tablaHTML = bannersSeleccionados.map(b => `
-  <tr>
-    <td colspan="2" align="center">
-      <a href="${b.href}" target="_blank">
-        <img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">
-      </a>
-    </td>
-  </tr>`).join("");
-  
+  const tablaHTML = bannersSeleccionados.map(b => {
+    const esHuincha = !b.href?.trim();
+    const contenido = esHuincha
+      ? `<img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">`
+      : `<a href="${b.href}" target="_blank">
+           <img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">
+         </a>`;
+    return `
+    <tr>
+      <td colspan="2" align="center">
+        ${contenido}
+      </td>
+    </tr>`;
+  }).join("");
+
   const tablaFinal = `
   <table width="600" cellspacing="0" cellpadding="0" align="center">
   ${tablaHTML}
   </table>`.trim();
-  
+
   document.getElementById("codigoGenerado").value = tablaFinal;
-  
 
-  document.getElementById("previewHTML").innerHTML = tablaCompleta;
-
+  // ❌ No reemplazar vista previa visual aquí
+  // document.getElementById("previewHTML").innerHTML = tablaFinal;
 }
+
 
 function copiarCodigo() {
   const area = document.getElementById("codigoGenerado");
@@ -225,8 +290,8 @@ function actualizarContador() {
   contador.textContent = `${total} banner${total !== 1 ? 's' : ''} agregados 🎯`;
 
   // 🎨 Visual style
-  contador.className = `badge px-3 py-2 rounded-pill text-dark ${
-    total === cantidadMaxima ? 'bg-warning' : 'bg-warning'
+  contador.className = `glass-badge px-3 py-2 rounded-pill  ${
+    total === cantidadMaxima ? 'glass-badge' : 'glass-badge'
   }`;
 
   // ✨ Animación sutil
@@ -244,12 +309,22 @@ function actualizarContador() {
 function limpiarCamposBanner() {
   bannersSeleccionados = [];
   document.getElementById("buscarBanner").value = "";
-  document.getElementById("previewHTML").innerHTML = "";
   document.getElementById("codigoGenerado").value = "";
 
+  // 🧹 Restaurar imagen de espera en previewHTML
+  document.getElementById("previewHTML").innerHTML = `
+  <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+    <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
+    <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+  </div>
+`;
+
+
+  // Reset contador
   const contador = document.getElementById("contadorBanners");
   if (contador) contador.textContent = `0 de ${cantidadMaxima} banners agregados`;
 
+  // Reset barra de progreso
   const barra = document.getElementById("barraProgreso");
   if (barra) {
     barra.style.width = `0%`;
@@ -258,9 +333,9 @@ function limpiarCamposBanner() {
 
   mostrarToast("🧹 Campos limpiados", "success");
 
-  actualizarContador(); // ← al resetear también
-
+  actualizarContador(); // ← También resetea internamente
 }
+
 
 
 function activarBotonLimpiar() {
@@ -294,7 +369,7 @@ function limpiarInputBuscar() {
 
 
 
-function mostrarToast(mensaje, tipo = 'success') {
+function mostrarToast(mensaje, tipo = 'purple-toast') {
   const toastContainer = document.getElementById("toastContainer");
   if (!toastContainer) return console.warn("⚠️ toastContainer no existe");
 
@@ -313,11 +388,244 @@ function mostrarToast(mensaje, tipo = 'success') {
 }
 
 
-window.addEventListener("DOMContentLoaded", async () => {
-  bannersJSON = await cargarBannersJson();
-  console.log("📦 bannersJSON combinado:", bannersJSON);
 
+
+window.addEventListener("DOMContentLoaded", async () => {
   const loader = document.getElementById("loaderOverlay");
-  loader.classList.add("hidden");
-  setTimeout(() => loader.remove(), 400);
+
+
+
+  // Apagar loader visualmente con transición suave
+  loader.style.transition = "opacity 0.3s ease";
+  loader.style.opacity = "0";
+
+  // Eliminar del DOM rápidamente
+  setTimeout(() => loader.remove(), 200); // 300ms = consistente con transición
 });
+
+
+function mostrarBannerEnPreview(htmlDelBanner) {
+  const contenedor = document.getElementById("previewHTML");
+  const imagenEspera = document.getElementById("imagenEspera");
+
+  // Elimina imagen si existe
+  if (imagenEspera) imagenEspera.remove();
+
+  // Inserta el banner
+  contenedor.innerHTML += htmlDelBanner;
+
+  // Baja el scroll al final si se agregó algo nuevo
+  contenedor.scrollTop = contenedor.scrollHeight;
+}
+
+function limpiarPreviewHTML() {
+  const contenedor = document.getElementById("previewHTML");
+  contenedor.innerHTML = `
+    <img id="imagenEspera" src="https://i.imgur.com/Q1qVbSQ.png" alt="Esperando contenido"
+         class="mx-auto d-block img-fluid opacity-50" style="max-width: 180px;">
+  `;
+}
+
+
+
+
+
+document.getElementById('guardarNuevoBanner').addEventListener('click', () => {
+  const nombre = document.getElementById('nuevoNombre').value.trim();
+  let href = document.getElementById('nuevoHref').value.trim();
+  const img_src = document.getElementById('nuevoImg').value.trim();
+  const alt = document.getElementById('nuevoAlt').value.trim();
+
+  if (!nombre || !img_src) {
+    mostrarToast("❌ Debes ingresar al menos el nombre y la URL de la imagen", "danger");
+    return;
+  }
+
+  // 🧠 Si el href es del dominio sodimac-cl, aplicar AMPscript
+  if (href.startsWith("https://www.sodimac.cl/sodimac-cl")) {
+    href = `%%=RedirectTo(concat('${href}',@prefix))=%%`;
+  }
+
+  const nuevoBanner = { nombre, href, img_src, alt };
+
+  // 🔥 Guardar en archivo lógico (banners.json o cyber-banner.json)
+  guardarBannerEnSeleccion(nuevoBanner);
+
+  mostrarToast("✅ Banner creado exitosamente", "success");
+
+  ['nuevoNombre', 'nuevoHref', 'nuevoImg', 'nuevoAlt'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+
+  const modal = bootstrap.Modal.getInstance(document.getElementById('modalCrearBanner'));
+  modal.hide();
+});
+
+
+
+
+function preguntarYGuardarBannerJSON() {
+  Swal.fire({
+    title: '¿Dónde quieres guardar el JSON?',
+    text: 'Elige el archivo donde guardar los banners',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: '📁 Guardar en banners.json',
+    cancelButtonText: '💾 Guardar en cyber-banner.json',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      descargarJSON(bannersJSON, 'banners.json');
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      descargarJSON(bannersJSON, 'cyber-banner.json');
+    }
+  });
+}
+
+
+
+
+function guardarBannerEnSeleccion(banner) {
+  Swal.fire({
+    title: '¿Dónde deseas guardar este banner?',
+    text: 'Elige el archivo lógico',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: '📁 Guardar en banners.json',
+    cancelButtonText: '💾 Guardar en cyber-banner.json',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      bannersJSON.push(banner);
+      guardarEnStorageBanners();
+      guardarBannerEnBackend(banner, 'normal');
+      renderizarBanners(bannersJSON, '#listaBanners');
+      mostrarToast('✅ Guardado en banners.json');
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      cyberBannersJSON.push(banner);
+      guardarEnStorageBanners();
+      guardarBannerEnBackend(banner, 'cyber');
+      renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
+      mostrarToast('✅ Guardado en cyber-banner.json');
+    }
+    
+  });
+}
+
+
+
+
+
+function guardarEnLocalStorage() {
+  localStorage.setItem('bannersJSON', JSON.stringify(bannersJSON));
+  localStorage.setItem('cyberBannersJSON', JSON.stringify(cyberBannersJSON));
+}
+
+
+function cargarDesdeLocalStorage() {
+  bannersJSON = JSON.parse(localStorage.getItem('bannersJSON')) || [];
+  cyberBannersJSON = JSON.parse(localStorage.getItem('cyberBannersJSON')) || [];
+
+  renderizarBanners(bannersJSON, '#listaBanners');
+  renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
+}
+
+window.addEventListener('DOMContentLoaded', cargarDesdeLocalStorage);
+
+// 🔗 Función para guardar banner en backend
+function guardarBannerEnBackend(banner, tipo) {
+  fetch('http://localhost:3000/guardar-banner', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ tipo, banner })
+  })
+  .then(res => res.text())
+  .then(msg => {
+    mostrarToast(`💾 ${msg}`, "success");
+
+    // 🔁 Agrega a la UI si aún no estaba (solo respaldo extra)
+    if (tipo === 'cyber' && !cyberBannersJSON.includes(banner)) {
+      cyberBannersJSON.push(banner);
+      guardarEnStorageBanners();
+      renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
+    } else if (tipo === 'normal' && !bannersJSON.includes(banner)) {
+      bannersJSON.push(banner);
+      guardarEnStorageBanners();
+      renderizarBanners(bannersJSON, '#listaBanners');
+    }
+  })
+  .catch(err => {
+    console.error('❌ Error al guardar en backend', err);
+    mostrarToast('❌ Error al guardar en backend', 'danger');
+  });
+}
+
+
+// ✅ Lógica de carga y persistencia en localStorage para banners
+let bannersJSON = JSON.parse(localStorage.getItem("bannersJSON")) || [];
+let cyberBannersJSON = JSON.parse(localStorage.getItem("cyberBannersJSON")) || [];
+
+function guardarEnStorageBanners() {
+  localStorage.setItem("bannersJSON", JSON.stringify(bannersJSON));
+  localStorage.setItem("cyberBannersJSON", JSON.stringify(cyberBannersJSON));
+}
+
+function cargarDesdeStorageBanners() {
+  bannersJSON = JSON.parse(localStorage.getItem("bannersJSON")) || [];
+  cyberBannersJSON = JSON.parse(localStorage.getItem("cyberBannersJSON")) || [];
+  renderizarBanners(bannersJSON, '#listaBanners');
+  renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  cargarDesdeStorageBanners();
+});
+
+
+
+function transformarYGuardarEnBackend() {
+  const inputHTML = document.getElementById("areaHTML").value;
+  const tipo = document.getElementById("tipoArchivo").value;
+
+  const doc = new DOMParser().parseFromString(inputHTML, "text/html");
+  const tabla = doc.querySelector("table");
+  const img = tabla?.querySelector("img");
+  const a = tabla?.querySelector("a");
+
+  if (!tabla || !img) {
+    mostrarToast("❌ Debes incluir al menos una <table> con <img>", "danger");
+    return;
+  }
+
+  // 🧠 Buscar comentario anterior a la tabla
+  const comentarioNodo = Array.from(doc.childNodes).find(n =>
+    n.nodeType === Node.COMMENT_NODE && n.textContent.trim()
+  );
+
+  const nombre = comentarioNodo?.textContent.trim() || img?.alt || "Sin nombre";
+
+  const banner = {
+    nombre,
+    href: a?.getAttribute("href") || "",
+    img_src: img?.getAttribute("src") || "",
+    alt: img?.getAttribute("alt") || ""
+  };
+
+  fetch("http://localhost:3000/guardar-banner", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ tipo, banner })
+  })
+    .then(res => res.text())
+    .then(msg => {
+      mostrarToast("✅ Banner guardado en archivo JSON", "success");
+      document.getElementById("resultadoJSON").textContent = JSON.stringify(banner, null, 2);
+      navigator.clipboard.writeText(JSON.stringify(banner, null, 2));
+    })
+    .catch(err => {
+      console.error("❌ Error al guardar:", err);
+      mostrarToast("❌ Error al guardar en backend", "danger");
+    });
+}
+
+

@@ -9,16 +9,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
   <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
   <link href="https://cdn.boxicons.com/fonts/transformations.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      font-family: 'Onest', sans-serif;
-      background-color: #121212; /* dark */
-      color: #f8f9fa; /* light */
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: #f8f9fa;
+      font-family: 'Segoe UI', sans-serif;
     }
     .suggestion-box {
       position: absolute;
@@ -84,33 +85,153 @@
 }
 
 
-.loader-spinner {
-  width: 3rem;
-  height: 3rem;
-  border: 4px solid rgba(255, 255, 255, 0.2);
-  border-top-color: white;
-  border-radius: 50%;
-  animation: spin 1.2s linear infinite, pulse 2s ease-in-out infinite;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+
+
+
+
+.glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      padding: 2rem;
+    }
+
+    .glass-input {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: white;
+    }
+
+    .glass-input::placeholder {
+      color: #ccc;
+    }
+
+    .glass-badge {
+      background: rgba(255, 193, 7, 0.25);
+      border: 1px solid rgba(255, 193, 7, 0.4);
+      color: #ffc107;
+      transition: all 0.3s ease;
+    }
+
+    .glass-badge.animate {
+      animation: bounceIn 0.6s;
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+
+    .bg-success-custom {
+  background-color: #00C896 !important;
+  color: white;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0); }
-  100% { transform: rotate(360deg); }
+.bg-warning-custom {
+  background-color: #FFB347 !important;
+  color: black;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.85; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+.bg-danger-custom {
+  background-color: #EF4444 !important;
+  color: white;
+}
+
+.bg-info-custom {
+  background-color: #3B82F6 !important;
+  color: white;
+}
+
+.bg-purple-toast {
+  background-color: #7C3AED !important;
+  color: white;
 }
 
 #loaderOverlay {
-  transition: opacity 0.4s ease;
+  transition: opacity 0.3s ease;
 }
 
-#loaderOverlay.hidden {
+
+.loader-spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(255, 255, 255, 0.15);
+  border-top: 5px solid #00C896;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+.preview-scroll {
+  max-height: 450px;
+  overflow-y: auto;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #212529;
+}
+
+/* Scroll oscuro bonito */
+.preview-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.preview-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.preview-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.tooltip-btn {
+  position: relative;
+  background-color: #111;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.tooltip-btn:hover {
+  background-color: #222;
+}
+
+.tooltip-text {
+  visibility: hidden;
   opacity: 0;
-  pointer-events: none;
+  width: max-content;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 6px;
+  position: absolute;
+  bottom: 125%; /* arriba del botón */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.3s;
+  z-index: 999;
+}
+
+.tooltip-btn:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
 
 
@@ -121,39 +242,60 @@
 </head>
 <body class="bg-dark text-light">
 
-  <!-- Loader Overlay Animado -->
-<!-- Loader Overlay Animado -->
-<div id="loaderOverlay" class="position-fixed top-0 start-0 w-100 h-100 bg-black d-flex flex-column justify-content-center align-items-center text-center" style="z-index: 9999;">
-  <div class="loader-spinner mb-3"></div>
-  <div class="text-light fw-light">Cargando Buscador banners...</div>
+<!-- 🔄 Loader Overlay elegante 
+<div id="loaderOverlay" style="
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #00C896;
+">
+  <div class="loader-spinner"></div>
+  <div class="mt-3 fw-bold small text-light">Cargando banners...</div>
 </div>
+
+-->
 
 
   <div class="container  py-5">
-    <div class="row">
-<div class="col-10">
-    <h1 class="mb-4">🔍 Buscar Banner y Generar HTML </h1>
+    <div class="row glass-card d-flex">
+<div class="col-8">
+    <h2 class="mb-4">🔍 Buscar Banner y Generar HTML </h2>
   </div>
     <div class="col-2">
-    <button onclick="limpiarCamposBanner()" class="btn btn-outline-light mt-3 mb-3 ms-2 d-flex gap-2">
-      <i class="bx bx-brush bx-sm"></i> Limpiar todo
-    </button> 
+
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearBanner">
+        ➕ Crear Banner
+      </button>
+
+    </div>
+    <div class="col-2 ">
+      <button onclick="limpiarCamposBanner()" class="btn btn-outline-light  ms-2 d-flex gap-2">
+        <i class="bx bx-brush bx-sm"></i> Limpiar todo
+      </button> 
+  
     </div>
   </div>
   <br>
-    <div class="row bg-secondary p-4 rounded">
+    <div class="row glass-card p-4">
 
-
+<div class="row d-flex">
   <div class="col-12">
     <div class="position-relative mb-4">
              <div class="input-group flex-nowrap">
-              <span class="input-group-text" id="addon-wrapping">
-                <i class="bx bx-search-big bx-sm"></i>Buscar Banner</span>
+              <span class="input-group-text d-flex gap-1" id="addon-wrapping">
+                <i class="bx bx-search-big bx-xs"></i>Buscar Banner</span>
 
            
-              <input type="text" class="form-control" id="buscarBanner" placeholder="Escribe nombre de banner..." aria-label="Username" aria-describedby="addon-wrapping" oninput="sugerenciasBannerSimple(this.value); activarBotonLimpiar()"
+              <input type="text" class="form-control" id="buscarBanner" placeholder="Escribe nombre de banner Ej. Banner Cyber..." aria-label="Username" aria-describedby="addon-wrapping" oninput="sugerenciasBannerSimple(this.value); activarBotonLimpiar()"
               onclick="activarBotonLimpiar()">
             </div>
+        
+  
     
       <button id="btnClearInput"
               class="btn btn-sm  position-absolute top-50 end-0  translate-middle-y me-2 d-none"
@@ -161,28 +303,34 @@
     
       <div id="sugerencias-banner" class="suggestion-box d-none"></div>
     </div>
-    
-    <div class="col-4">
-      <div class="mb-3">
-  
-  
-     
-        
-        <span id="contadorBanners" class="badge bg-warning text-dark px-3 py-2 rounded-pill">
-          0 banners agregados 🎯
-        </span>
-      </div>
-    </div>
-
   </div>
 
-  
-   
+
+
+
+</div>
+
+<div class="col-12">
+  <div class="mb-3">
+    
+    <span id="contadorBanners" class="glass-badge px-3 py-2 rounded-pill">
+      0 banners agregados 🎯
+    </span>
+  </div>
+</div>
+
+
+
     <div class="col-8">
     <div class="card card-dark">
       <div class="card-body">
         <h5 class="card-title d-flex gap-2"><i class="bx bx-picture-in-picture-close bx-sm"></i> Vista previa</h5>
-        <div id="previewHTML" class="border p-3 bg-dark-subtle mb-3 pt-3 rounded"></div>
+        <div id="previewHTML" class="preview-scroll bg-dark text-white rounded-4 p-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+          <i class="bx bx-image-alt" style="font-size: 4rem; opacity: 0.3;"></i>
+          <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+        </div>
+        
+        
       </div>
     </div>
   </div>
@@ -191,11 +339,22 @@
 
     <h5 class="card-title mt-3 d-flex gap-2"><i class="bx bx-clipboard-code bx-sm"></i>Código HTML AMPscript:</h5>
     <textarea id="codigoGenerado" class="form-control" rows="8" readonly></textarea>
-    <button onclick="copiarCodigo()" class="btn btn-primary mt-3 mb-3 d-flex justify-content-center gap-2"><i class="bx bx-copy bx-sm"></i>Copiar HTML</button>
+    <button onclick="copiarCodigo()" class="btn btn-light mt-3 mb-3 d-flex justify-content-center gap-2"><i class="bx bx-copy bx-sm"></i>Copiar HTML</button>
 
   </div>
 
+
+
+
+  <div class="col-4 mt-2">
+  <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modalTransformador">
+    🧩 Tabla HTML a JSON
+  </button>
+
+</div>
   </div>
+
+
   </div>
 
 
@@ -237,6 +396,55 @@
 </div>
 
 
+<div class="modal fade" id="modalCrearBanner" tabindex="-1" aria-labelledby="modalCrearBannerLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCrearBannerLabel">Crear Nuevo Banner</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <input id="nuevoNombre" type="text" class="form-control mb-2" placeholder="Nombre del banner">
+        <input id="nuevoHref" type="text" class="form-control mb-2" placeholder="Enlace (href)">
+        <input id="nuevoImg" type="text" class="form-control mb-2" placeholder="Imagen (src)">
+        <input id="nuevoAlt" type="text" class="form-control mb-2" placeholder="Texto alternativo (alt)">
+      </div>
+      <div class="modal-footer">
+        <button id="guardarNuevoBanner" class="btn btn-success">Guardar Banner</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Transformador + Guardado JSON -->
+<div class="modal fade" id="modalTransformador" tabindex="-1" aria-labelledby="modalTransformadorLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTransformadorLabel">Transformar tabla HTML y guardar como JSON</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <textarea id="areaHTML" class="form-control bg-black text-white" rows="8" placeholder="Pega aquí la tabla HTML..."></textarea>
+
+        <div class="d-flex justify-content-end gap-2 mt-3">
+          <select id="tipoArchivo" class="form-select w-auto">
+            <option value="normal">📁 banners.json</option>
+            <option value="cyber">💾 cyber-banner.json</option>
+          </select>
+          <button onclick="transformarYGuardarEnBackend()" class="btn btn-success">
+            💾 Transformar y guardar JSON
+          </button>
+          
+        </div>
+
+        <pre id="resultadoJSON" class="mt-3 bg-black text-light p-2 rounded small"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <!-- Contenedor de toasts con z-index mayor a Bootstrap modal -->
 <div id="toastContainer" class="position-fixed bottom-0 end-0 p-3" style="z-index: 2000 !important;"></div>
 
@@ -260,8 +468,13 @@
     </div>
   </div>
 </footer>
+<script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  
+
+
 </body>
 </html>
