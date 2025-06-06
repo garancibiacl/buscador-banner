@@ -353,7 +353,6 @@
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/02-05-BANNER-VOA-2025.jpg",
     "alt": "Ir a VOA 2025"
   },
-
   {
     "nombre": "RULETA TIENDA",
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tucasasiempregana?',@prefix))=%%",
@@ -414,7 +413,6 @@
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-6-CSI-EN-HERRAMIENTAS-ESPECIALIZADAS-v1.png",
     "alt": "Ir a Herramientas Especializadas"
   },
-
   {
     "nombre": "REGALONES DE LA CASA",
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especial_regalones_de_la_casa?',@prefix))=%%",
@@ -427,4 +425,5 @@
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-Catalogo-PPI-v2.png",
     "alt": "Revisa Nuestro Catalogo"
   }
+ 
 ]

@@ -462,8 +462,8 @@ document.getElementById('guardarNuevoBanner').addEventListener('click', () => {
 });
 
 
-
-
+/*
+<!-- Función para guardar en 2 archivos y alert -->
 function preguntarYGuardarBannerJSON() {
   Swal.fire({
     title: '¿Dónde quieres guardar el JSON?',
@@ -512,6 +512,27 @@ function guardarBannerEnSeleccion(banner) {
   });
 }
 
+*/
+
+
+function preguntarYGuardarBannerJSON(banner) {
+  // Siempre guardar en banners.json
+  bannersJSON.push(banner);
+  guardarEnStorageBanners();
+  guardarBannerEnBackend(banner, 'normal');
+  renderizarBanners(bannersJSON, '#listaBanners');
+  mostrarToast('✅ Guardado automáticamente en banners.json');
+}
+
+
+function guardarBannerEnSeleccion(banner) {
+  // Guardar siempre en banners.json sin preguntar
+  bannersJSON.push(banner);
+  guardarEnStorageBanners();
+  guardarBannerEnBackend(banner, 'normal');
+  renderizarBanners(bannersJSON, '#listaBanners');
+  mostrarToast('✅ Guardado directamente en banners.json');
+}
 
 
 

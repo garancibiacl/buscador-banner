@@ -262,24 +262,21 @@
 
 
   <div class="container  py-5">
-    <div class="row glass-card d-flex">
-<div class="col-8">
-    <h2 class="mb-4">🔍 Buscar Banner y Generar HTML </h2>
-  </div>
-    <div class="col-2">
-
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCrearBanner">
-        ➕ Crear Banner
-      </button>
-
+    <div class="row align-items-center justify-content-between glass-card">
+      <div class="col-md-auto">
+        <h2 class="mb-0">🔍 Buscar Banner y Generar HTML</h2>
+      </div>
+    
+      <div class="col-md-auto ms-auto d-flex gap-2">
+        <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalCrearBanner">
+          <i class="bx bx-plus-circle bx-sm"></i> Crear Banner
+                </button>
+        <button onclick="limpiarCamposBanner()" class="btn btn-outline-light d-flex align-items-center gap-2">
+          <i class="bx bx-brush bx-sm"></i> Limpiar todo
+        </button>
+      </div>
     </div>
-    <div class="col-2 ">
-      <button onclick="limpiarCamposBanner()" class="btn btn-outline-light  ms-2 d-flex gap-2">
-        <i class="bx bx-brush bx-sm"></i> Limpiar todo
-      </button> 
-  
-    </div>
-  </div>
+    
   <br>
     <div class="row glass-card p-4">
 
