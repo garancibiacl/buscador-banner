@@ -353,12 +353,7 @@
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/02-05-BANNER-VOA-2025.jpg",
     "alt": "Ir a VOA 2025"
   },
-  {
-    "nombre": "Landing PPI - PRO",
-    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/preparese-para-el-invierno-pro?',@prefix))=%%",
-    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-Landing-PPI-PRO-v3.png",
-    "alt": "Ir a Landing PPI - PRO"
-  },
+
   {
     "nombre": "RULETA TIENDA",
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tucasasiempregana?',@prefix))=%%",
@@ -419,12 +414,7 @@
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-6-CSI-EN-HERRAMIENTAS-ESPECIALIZADAS-v1.png",
     "alt": "Ir a Herramientas Especializadas"
   },
-  {
-    "nombre": "lampara1",
-    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG36066/Iluminacion?',@prefix))=%%",
-    "img_src": "dds",
-    "alt": "dsdsd"
-  },
+
   {
     "nombre": "REGALONES DE LA CASA",
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especial_regalones_de_la_casa?',@prefix))=%%",
