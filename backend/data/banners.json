@@ -426,9 +426,15 @@
     "alt": "dsdsd"
   },
   {
-    "nombre": "gust",
-    "href": "sas",
-    "img_src": "sasa",
-    "alt": "sasas"
+    "nombre": "REGALONES DE LA CASA",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especial_regalones_de_la_casa?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-regalones-casa-abril.png",
+    "alt": "Especiales regalones"
+  },
+  {
+    "nombre": "Catalogo PPI",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/catalogo-ppi-invierno-pro?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-Catalogo-PPI-v2.png",
+    "alt": "Revisa Nuestro Catalogo"
   }
 ]
