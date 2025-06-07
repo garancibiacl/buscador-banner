@@ -186,19 +186,30 @@ function eliminarBanner(index, boton) {
   // Eliminar del array
   bannersSeleccionados.splice(index, 1);
 
-  // Si ya no hay banners, mostrar imagen/estado de espera
-  const tabla = document.getElementById("tablaPreview");
-  if (!tabla || tabla.rows.length === 0) {
+  // Si ya no quedan banners seleccionados...
+  if (bannersSeleccionados.length === 0) {
+    // Restaurar imagen de espera
     document.getElementById("previewHTML").innerHTML = `
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
-    <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
-    <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
-  </div>`;
+      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+        <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
+        <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+      </div>`;
+
+    // Limpiar el textarea
+    document.getElementById("codigoGenerado").value = "";
+
+    // 🆕 Limpiar input de búsqueda
+    document.getElementById("buscarBanner").value = "";
+
+    // 🧹 Ocultar botón de limpiar input si existe
+    const btnClear = document.getElementById("btnClearInput");
+    if (btnClear) btnClear.classList.add("d-none");
+  } else {
+    generarHTMLTabla(); // solo si hay banners restantes
   }
 
   mostrarToast("🗑️ Banner eliminado", "danger");
   actualizarContador();
-  generarHTMLTabla();
 }
 
 
@@ -390,18 +401,24 @@ function mostrarToast(mensaje, tipo = 'purple-toast') {
 
 
 
-window.addEventListener("DOMContentLoaded", async () => {
+window.addEventListener("DOMContentLoaded", () => {
   const loader = document.getElementById("loaderOverlay");
 
+  const tiempoMinimoVisible = 800; // más rápido, pero aún perceptible
+  const tiempoInicio = Date.now();
 
+  // Ejecuta apenas el DOM esté listo
+  requestAnimationFrame(() => {
+    const tiempoTranscurrido = Date.now() - tiempoInicio;
+    const restante = Math.max(0, tiempoMinimoVisible - tiempoTranscurrido);
 
-  // Apagar loader visualmente con transición suave
-  loader.style.transition = "opacity 0.3s ease";
-  loader.style.opacity = "0";
-
-  // Eliminar del DOM rápidamente
-  setTimeout(() => loader.remove(), 200); // 300ms = consistente con transición
+    setTimeout(() => {
+      loader.style.opacity = "0";
+      setTimeout(() => loader.remove(), 300); // coincide con transición
+    }, restante);
+  });
 });
+
 
 
 function mostrarBannerEnPreview(htmlDelBanner) {

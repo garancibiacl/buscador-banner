@@ -235,30 +235,53 @@
 }
 
 
-
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
 
 
   </style>
 </head>
 <body class="bg-dark text-light">
 
-<!-- 🔄 Loader Overlay elegante 
-<div id="loaderOverlay" style="
+  <div id="loaderOverlay" style="
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: linear-gradient(135deg, #000000, #0a0a0a);
   z-index: 9999;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: #00C896;
+  transition: opacity 0.5s ease;
+  opacity: 0; animation: 
+  fadeIn 0.4s forwards;
 ">
-  <div class="loader-spinner"></div>
-  <div class="mt-3 fw-bold small text-light">Cargando banners...</div>
+  <div class="loader-spinner" style="
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid #00C896;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  "></div>
+<div class="mt-3  small text-light" >
+  Inspirando ideas...
+</div>
 </div>
 
--->
+<style>
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+
 
 
   <div class="container  py-5">
