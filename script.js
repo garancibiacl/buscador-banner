@@ -404,20 +404,20 @@ function mostrarToast(mensaje, tipo = 'purple-toast') {
 window.addEventListener("DOMContentLoaded", () => {
   const loader = document.getElementById("loaderOverlay");
 
-  const tiempoMinimoVisible = 800; // más rápido, pero aún perceptible
+  const tiempoMinimoVisible = 800;
   const tiempoInicio = Date.now();
 
-  // Ejecuta apenas el DOM esté listo
   requestAnimationFrame(() => {
     const tiempoTranscurrido = Date.now() - tiempoInicio;
     const restante = Math.max(0, tiempoMinimoVisible - tiempoTranscurrido);
 
     setTimeout(() => {
       loader.style.opacity = "0";
-      setTimeout(() => loader.remove(), 300); // coincide con transición
+      setTimeout(() => loader.remove(), 400); // coincide con transición CSS
     }, restante);
   });
 });
+
 
 
 
