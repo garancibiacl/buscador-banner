@@ -664,6 +664,13 @@ function transformarYGuardarEnBackend() {
       console.error("❌ Error al guardar:", err);
       mostrarToast("❌ Error al guardar en backend", "danger");
     });
+
+    fetch("/.netlify/functions/guardar-banner", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tipo, banner })
+    })
+    
 }
 
 
