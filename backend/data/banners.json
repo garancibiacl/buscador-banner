@@ -448,5 +448,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/seleccion//lleva-3-y-paga-2?sid=SO_HO_HOM_HUIN_387687?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-gif-card-v2.png",
     "alt": "Gif Card"
+  },
+  {
+    "nombre": "REGALONES DE LA CASA",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especial_regalones_de_la_casa?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-regalones-casa-abril.png",
+    "alt": "Especiales regalones"
   }
 ]
