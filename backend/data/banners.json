@@ -424,6 +424,24 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/catalogo-ppi-invierno-pro?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-Catalogo-PPI-v2.png",
     "alt": "Revisa Nuestro Catalogo"
+  },
+  {
+    "nombre": "HUINCHA VOA HOGAR",
+    "href": "%%=RedirectTo(concat('https://qr-sodimac-cl.pages.dev/?local=643db32a2c286c6480270348&name=Asesor%C3%ADa_por_videollamada&utm_source=&utm_medium=&utm_term=&utm_content=&utm_campaign=?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/Huincha-voa-hogar.png",
+    "alt": "Ir a VOA"
+  },
+  {
+    "nombre": "HUINCHA LANDING OTOIN",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/preparate-para-el-invierno?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/HUINCHA-LANDING-OTOIN-v2.png",
+    "alt": "Ir a OTOIN"
+  },
+  {
+    "nombre": "HUINCHA LANDING  TEXTIL OTOIN",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especial-textil-otono-invierno?sid=SO_HO_HOM_SC_387583?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/HUINCHA-LANDING-TEXTIL-OTOIN-v1.png",
+    "alt": "Ir a OTOIN"
   }
- 
+
 ]
