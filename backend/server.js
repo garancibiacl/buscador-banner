@@ -38,6 +38,8 @@ app.post('/guardar-banner', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Backend escuchando en http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Backend escuchando en http://localhost:${PORT}`);
+  });
+}
