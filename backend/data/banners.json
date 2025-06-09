@@ -442,6 +442,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especial-textil-otono-invierno?sid=SO_HO_HOM_SC_387583?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/HUINCHA-LANDING-TEXTIL-OTOIN-v1.png",
     "alt": "Ir a OTOIN"
+  },
+  {
+    "nombre": "HUINCHA GIFT CARD X COMPRAS SOBRE 60LKS",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/seleccion//lleva-3-y-paga-2?sid=SO_HO_HOM_HUIN_387687?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-gif-card-v2.png",
+    "alt": "Gif Card"
   }
-
 ]
