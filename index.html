@@ -347,27 +347,39 @@
 
 
 .btn-ayuda {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  font-weight: bold;
-  background: linear-gradient(145deg, #1f1f1f, #2c2c2c);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  box-shadow: 0 8px 20px rgba(0, 255, 255, 0.1);
-  transition: all 0.3s ease-in-out;
-  z-index: 9999;
-}
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(145deg, #1f1f1f, #2c2c2c);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0, 255, 255, 0.1);
+      transition: all 0.3s ease-in-out;
+      z-index: 9999;
+    }
 
-.btn-ayuda:hover {
-  background: #00e0ff;
-  color: #000;
-  box-shadow: 0 0 15px #00e0ff, 0 0 40px #00e0ff4d;
-}
+    .btn-ayuda:hover {
+      background: #00e0ff;
+      color: #000;
+      box-shadow: 0 0 15px #00e0ff, 0 0 40px #00e0ff4d;
+    }
+
+    .tooltip-inner {
+      background-color: #00e0ff;
+      color: #000;
+      font-weight: bold;
+      border-radius: 0.5rem;
+    }
+
+    .tooltip.bs-tooltip-auto[x-placement^="top"] .arrow::before, 
+    .tooltip.bs-tooltip-top .arrow::before {
+      border-top-color: #00e0ff;
+    }
 
 
 
@@ -583,10 +595,10 @@
   </div>
 </div>
 
-<!-- Botón flotante -->
-<button id="btnAyuda" class="btn-ayuda" data-bs-toggle="modal" data-bs-target="#modalAyuda">
+<!-- START Botón flotante AYUDA -->
+<button id="btnAyuda" class="tooltip-btn btn-ayuda" data-bs-toggle="modal" data-bs-target="#modalAyuda" >
   ?
-  <span class="tooltip-text">Editar banner</span>
+  <span class="tooltip-text">Ver guía rápida</span>
 </button>
 
 
@@ -595,7 +607,7 @@
   <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
     <div class="modal-content bg-dark text-white">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalAyudaLabel">🧭 Guía rápida de uso</h5>
+        <h5 class="modal-title" id="modalAyudaLabel">🧭 Guía rápida de uso del Buscador de Banners</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body text-start" id="contenidoAyuda" style="white-space: pre-wrap; font-size: 0.95rem;">
@@ -605,6 +617,8 @@
   </div>
 </div>
 
+
+<!-- FIN Botón flotante AYUDA -->
 
 
 <!-- Contenedor de toasts con z-index mayor a Bootstrap modal -->
