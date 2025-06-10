@@ -346,6 +346,31 @@
 }
 
 
+.btn-ayuda {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(145deg, #1f1f1f, #2c2c2c);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 8px 20px rgba(0, 255, 255, 0.1);
+  transition: all 0.3s ease-in-out;
+  z-index: 9999;
+}
+
+.btn-ayuda:hover {
+  background: #00e0ff;
+  color: #000;
+  box-shadow: 0 0 15px #00e0ff, 0 0 40px #00e0ff4d;
+}
+
+
+
   </style>
 </head>
 <body class="bg-dark text-light">
@@ -557,6 +582,29 @@
     </div>
   </div>
 </div>
+
+<!-- Botón flotante -->
+<button id="btnAyuda" class="btn-ayuda" data-bs-toggle="modal" data-bs-target="#modalAyuda">
+  ?
+  <span class="tooltip-text">Editar banner</span>
+</button>
+
+
+<!-- Modal vacío -->
+<div class="modal fade" id="modalAyuda" tabindex="-1" aria-labelledby="modalAyudaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAyudaLabel">🧭 Guía rápida de uso</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-start" id="contenidoAyuda" style="white-space: pre-wrap; font-size: 0.95rem;">
+        <div class="text-secondary">Cargando contenido...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <!-- Contenedor de toasts con z-index mayor a Bootstrap modal -->

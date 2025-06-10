@@ -673,3 +673,18 @@ fetch("http://localhost:3000/guardar-banner", {
   
 }
 
+// START FUNCION MODAL DE AYUDA
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('README.md')
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById('contenidoAyuda').textContent = data;
+    })
+    .catch(err => {
+      document.getElementById('contenidoAyuda').innerHTML = "<div class='text-danger'>❌ Error al cargar la ayuda.</div>";
+      console.error("Error al cargar guía:", err);
+    });
+});
+
+// FIN FUNCION MODAL DE AYUDA
