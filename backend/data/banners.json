@@ -454,6 +454,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especial_regalones_de_la_casa?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-regalones-casa-abril.png",
     "alt": "Especiales regalones"
+  },
+  {
+    "nombre": "HUINCHA TIENDAS",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-tiendas-abril.png",
+    "alt": "Visitenos"
   }
-
 ]
