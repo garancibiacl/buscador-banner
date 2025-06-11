@@ -72,6 +72,13 @@ function sugerenciasBannerSimple(valor) {
 const box = document.getElementById("sugerencias-banner");
 const input = document.getElementById("buscarBanner");
 
+ // 💡 Limpia recientes cuando se empieza una nueva búsqueda
+ if (valor.length === 1) {
+  bannersRecientes = [];
+  localStorage.removeItem("bannersRecientes");
+  renderizarRecientes();
+}
+
 // Si el input está vacío, cerramos sugerencias
 if (!valor.trim()) {
   box.innerHTML = '';
@@ -100,23 +107,31 @@ filtrados.forEach((b, i) => {
   item.className = "suggestion-item";
   item.textContent = b.nombre;
 
-  item.onclick = () => {
-    // Limpiar input + setear nombre (sin delay)
-    input.value = b.nombre;
+  
 
-    // Cierra las sugerencias
-    box.innerHTML = '';
-    box.classList.add("d-none");
+item.onclick = () => {
+  // 👇 ❌ Antes: setear valor (esto ya no es necesario)
+  // input.value = b.nombre;
 
-    // Agrega banner
-    generarBannerDesdeJson(b);
-    agregarARecientes(b);
-    actualizarVistaBanner(b); // 👈 esta línea nueva
-    
+  // ✅ Ahora: limpiar input
+  input.value = "";
 
-    // Estilo visual
-    input.classList.add("border-success");
-    setTimeout(() => input.classList.remove("border-success"), 1000);
+  // Cierra las sugerencias
+  box.innerHTML = '';
+  box.classList.add("d-none");
+
+ 
+
+  // Agrega y actualiza
+  generarBannerDesdeJson(b);
+  agregarARecientes(b);
+  actualizarVistaBanner(b);
+  renderizarRecientes(); // 👈 Esto mostrará los banners recientes al instante
+
+
+  // Estilo visual (con validación opcional)
+  input.classList.add("border-success");
+  setTimeout(() => input.classList.remove("border-success"), 1000);
 
     // Toast
   /*if (typeof mostrarToast === "function") {
@@ -175,45 +190,120 @@ const filaPreview = `
 
 contenedor.querySelector("table").insertAdjacentHTML("beforeend", filaPreview);
 
+document.getElementById("previewHTML").innerHTML = generarHTMLDesdeSeleccionados();
+document.getElementById("codigoGenerado").value = generarHTMLDesdeSeleccionados();
+
+
 mostrarToast(`🎯 Seleccionaste: <strong>${banner.nombre}</strong>`, "purple-toast");
 actualizarContador();
 generarHTMLTabla();
+
+
 }
 
 
 function eliminarBanner(index, boton) {
-// Eliminar la fila visualmente del DOM
-const fila = document.getElementById(`fila-banner-${index}`);
-if (fila) fila.remove();
+  const fila = document.getElementById(`fila-banner-${index}`);
+  if (fila) fila.remove();
 
-// Eliminar del array
-bannersSeleccionados.splice(index, 1);
+  bannersSeleccionados.splice(index, 1);
 
-// Si ya no quedan banners seleccionados...
-if (bannersSeleccionados.length === 0) {
-  // Restaurar imagen de espera
-  document.getElementById("previewHTML").innerHTML = `
-    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
-      <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
-      <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
-    </div>`;
+  if (bannersSeleccionados.length === 0) {
+    
+    document.getElementById("previewHTML").innerHTML = `
+      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+        <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
+        <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+      </div>`;
+    document.getElementById("codigoGenerado").value = "";
+    document.getElementById("buscarBanner").value = "";
 
-  // Limpiar el textarea
-  document.getElementById("codigoGenerado").value = "";
+    // 🧽 Limpiar recientes
+bannersRecientes = [];
+localStorage.removeItem("bannersRecientes");
+renderizarRecientes();
 
-  // 🆕 Limpiar input de búsqueda
-  document.getElementById("buscarBanner").value = "";
 
-  // 🧹 Ocultar botón de limpiar input si existe
-  const btnClear = document.getElementById("btnClearInput");
-  if (btnClear) btnClear.classList.add("d-none");
-} else {
-  generarHTMLTabla(); // solo si hay banners restantes
+    const btnClear = document.getElementById("btnClearInput");
+    if (btnClear) btnClear.classList.add("d-none");
+  } else {
+    generarHTMLTabla();
+
+ 
+
+    document.getElementById("previewHTML").innerHTML = generarHTMLDesdeSeleccionados();
+document.getElementById("codigoGenerado").value = generarHTMLDesdeSeleccionados();
+
+
+    // 🔁 Reforzar actualización del código (por si no lo hace generarHTMLTabla)
+    const htmlGenerado = generarHTMLDesdeSeleccionados(); // función auxiliar
+    document.getElementById("codigoGenerado").value = htmlGenerado;
+    document.getElementById("previewHTML").innerHTML = htmlGenerado;
+
+
+    
+    
+  }
+
+  
+
+  mostrarToast("🗑️ Banner eliminado", "danger");
+  actualizarContador();
 }
 
-mostrarToast("🗑️ Banner eliminado", "danger");
-actualizarContador();
+
+function generarHTMLDesdeSeleccionados() {
+  if (bannersSeleccionados.length === 0) {
+    // 🧠 Si no hay banners seleccionados, mostramos recientes automáticamente
+    renderizarRecientes();
+
+    return `
+      <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+        <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
+        <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+      </div>
+    `;
+  }
+
+  return bannersSeleccionados.map((b, index) => {
+    const tabla = `
+      <table width="600" cellspacing="0" cellpadding="0" align="center">
+        <tr>
+          <td colspan="2" align="center">
+            <a href="${b.href}" target="_blank">
+              <img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">
+            </a>
+          </td>
+        </tr>
+      </table>
+    `;
+
+    const botonEditar = `
+      <div class="mt-2 d-flex justify-content-end gap-2">
+
+        <button class="tooltip-btn btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+                onclick="abrirModalEditar(${index})"
+                style="font-size: 0.85rem;">
+          <i class="bx bx-edit-alt bx-xs"></i> Editar
+          <span class="tooltip-text">Editar banner</span>
+        </button>
+
+        <button class="tooltip-btn btn btn-danger btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+                onclick="eliminarBanner(${index}, this)"
+                style="font-size: 0.85rem;">
+          <i class="bx bx-trash bx-xs"></i> Eliminar
+          <span class="tooltip-text">Eliminar banner</span>
+        </button>
+
+      </div>
+    `;
+
+    return `<div id="fila-banner-${index}" class="mb-4">${tabla}${botonEditar}</div>`;
+  }).join("\n");
 }
+
+
+
 
 
 function abrirModalEditar(index) {
@@ -294,6 +384,8 @@ mostrarToast("📋 HTML copiado correctamente", "success");
 function actualizarContador() {
 const contador = document.getElementById("contadorBanners");
 const total = bannersSeleccionados.length;
+
+
 
 if (!contador) {
   console.warn("⚠️ No se encontró el elemento #contadorBanners");
@@ -709,6 +801,7 @@ function agregarARecientes(banner) {
 // Renderiza los banners recientes en el contenedor #listaRecientes
 function renderizarRecientes() {
   const cont = document.getElementById("listaRecientes");
+
   if (!cont) return;
 
   cont.innerHTML = "";
