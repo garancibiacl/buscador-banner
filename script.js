@@ -79,6 +79,8 @@ const input = document.getElementById("buscarBanner");
   renderizarRecientes();
 }
 
+
+
 // Si el input está vacío, cerramos sugerencias
 if (!valor.trim()) {
   box.innerHTML = '';
@@ -231,8 +233,6 @@ renderizarRecientes();
 
  
 
-    document.getElementById("previewHTML").innerHTML = generarHTMLDesdeSeleccionados();
-document.getElementById("codigoGenerado").value = generarHTMLDesdeSeleccionados();
 
 
     // 🔁 Reforzar actualización del código (por si no lo hace generarHTMLTabla)
@@ -240,6 +240,8 @@ document.getElementById("codigoGenerado").value = generarHTMLDesdeSeleccionados(
     document.getElementById("codigoGenerado").value = htmlGenerado;
     document.getElementById("previewHTML").innerHTML = htmlGenerado;
 
+    document.getElementById("previewHTML").innerHTML = generarHTMLDesdeSeleccionados();
+    document.getElementById("codigoGenerado").value = generarHTMLSoloTablas();
 
     
     
@@ -884,3 +886,20 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // FIN DE LISTAS RECIENTES
+
+
+function generarHTMLSoloTablas() {
+  return bannersSeleccionados.map(b => {
+    return `
+      <table width="600" cellspacing="0" cellpadding="0" align="center">
+        <tr>
+          <td colspan="2" align="center">
+            <a href="${b.href}" target="_blank">
+              <img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">
+            </a>
+          </td>
+        </tr>
+      </table>
+    `;
+  }).join("\n");
+}
