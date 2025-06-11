@@ -220,14 +220,13 @@ function eliminarBanner(index, boton) {
     document.getElementById("codigoGenerado").value = "";
     document.getElementById("buscarBanner").value = "";
 
-    // 🧽 Limpiar recientes
-bannersRecientes = [];
-localStorage.removeItem("bannersRecientes");
-renderizarRecientes();
+
 
 
     const btnClear = document.getElementById("btnClearInput");
     if (btnClear) btnClear.classList.add("d-none");
+      // ✅ SOLO renderizamos, no borramos historial
+  renderizarRecientes(); 
   } else {
     generarHTMLTabla();
 
