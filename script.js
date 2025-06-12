@@ -49,15 +49,26 @@ return resultado;
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
-bannersJSON = await cargarBannersJson("banners.json");
-cyberBannersJSON = await cargarBannersJson("cyber-banner.json");
+  bannersJSON = await cargarBannersJson("banners.json");
+  cyberBannersJSON = await cargarBannersJson("cyber-banner.json");
 
-renderizarBanners(bannersJSON, '#listaBanners');
-renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
+  renderizarBanners(bannersJSON, '#listaBanners');
+  renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
 
-console.log("📦 banners cargados:", bannersJSON);
-console.log("📦 cyber cargados:", cyberBannersJSON);
+  // ✅ Inicializa banners recientes antes de renderizar
+  const dataRecientes = localStorage.getItem("bannersRecientes");
+  bannersRecientes = dataRecientes ? JSON.parse(dataRecientes) : [];
+
+  // ✅ Ahora sí: renderiza recientes con datos
+  renderizarRecientes();
+
+  console.log("📦 banners cargados:", bannersJSON);
+  console.log("📦 cyber cargados:", cyberBannersJSON);
+  console.log("🕘 banners recientes:", bannersRecientes);
 });
+
+
+
 
 
 
@@ -72,14 +83,12 @@ function sugerenciasBannerSimple(valor) {
 const box = document.getElementById("sugerencias-banner");
 const input = document.getElementById("buscarBanner");
 
- // 💡 Limpia recientes cuando se empieza una nueva búsqueda
- if (valor.length === 1) {
-  bannersRecientes = [];
-  localStorage.removeItem("bannersRecientes");
-  renderizarRecientes();
-}
-
-
+  // 💡 Limpia recientes cuando se empieza una nueva búsqueda
+  if (valor.length === 1) {
+    bannersRecientes = [];
+    localStorage.removeItem("bannersRecientes");
+    renderizarRecientes();
+  }
 
 // Si el input está vacío, cerramos sugerencias
 if (!valor.trim()) {
@@ -205,53 +214,42 @@ generarHTMLTabla();
 
 
 function eliminarBanner(index, boton) {
+  // Eliminar la fila visualmente del DOM
   const fila = document.getElementById(`fila-banner-${index}`);
   if (fila) fila.remove();
 
+  // Eliminar del array
   bannersSeleccionados.splice(index, 1);
 
+  // Si ya no quedan banners seleccionados...
   if (bannersSeleccionados.length === 0) {
-    
+    // Restaurar imagen de espera
     document.getElementById("previewHTML").innerHTML = `
       <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
         <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
         <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
       </div>`;
+
+    // Limpiar el textarea
     document.getElementById("codigoGenerado").value = "";
+
+    // 🆕 Limpiar input de búsqueda
     document.getElementById("buscarBanner").value = "";
 
+        // ✅ SOLO renderizamos, no borramos historial
+        renderizarRecientes(); 
 
-
-
+    // 🧹 Ocultar botón de limpiar input si existe
     const btnClear = document.getElementById("btnClearInput");
     if (btnClear) btnClear.classList.add("d-none");
-      // ✅ SOLO renderizamos, no borramos historial
-  renderizarRecientes(); 
   } else {
-    generarHTMLTabla();
-
- 
-
-
-
-    // 🔁 Reforzar actualización del código (por si no lo hace generarHTMLTabla)
-    const htmlGenerado = generarHTMLDesdeSeleccionados(); // función auxiliar
-    document.getElementById("codigoGenerado").value = htmlGenerado;
-    document.getElementById("previewHTML").innerHTML = htmlGenerado;
-
-    document.getElementById("previewHTML").innerHTML = generarHTMLDesdeSeleccionados();
-    document.getElementById("codigoGenerado").value = generarHTMLSoloTablas();
-
-    
-    
+    generarHTMLTabla(); // solo si hay banners restantes
   }
 
-  
 
   mostrarToast("🗑️ Banner eliminado", "danger");
   actualizarContador();
 }
-
 
 function generarHTMLDesdeSeleccionados() {
   if (bannersSeleccionados.length === 0) {
@@ -436,7 +434,7 @@ function limpiarCamposBanner() {
 
   // 🧽 Limpiar recientes
   bannersRecientes = [];
-  localStorage.removeItem("bannersRecientes");
+  //localStorage.removeItem("bannersRecientes");
   renderizarRecientes(); // ← actualiza la vista inmediatamente
 
   // ✅ Toast opcional
@@ -790,11 +788,11 @@ document.addEventListener('DOMContentLoaded', () => {
 // START DE LISTAS RECIENTES
 
 
-// Agrega un banner a los recientes (máximo 5)
+// Agrega un banner a los recientes (máximo 8)
 function agregarARecientes(banner) {
   bannersRecientes = bannersRecientes.filter(b => b.nombre !== banner.nombre);
   bannersRecientes.unshift(banner);
-  bannersRecientes = bannersRecientes.slice(0, 5);
+  bannersRecientes = bannersRecientes.slice(0, 8);
   localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
   renderizarRecientes();
 }
@@ -828,6 +826,8 @@ function renderizarRecientes() {
     item.onclick = () => {
       generarBannerDesdeJson(b);
       actualizarVistaBanner(b);
+      renderizarRecientes();
+
       mostrarToast(`✅ "${b.nombre}" agregado desde recientes`, "success");
 
       // Guardar el nombre en vista
@@ -885,20 +885,3 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // FIN DE LISTAS RECIENTES
-
-
-function generarHTMLSoloTablas() {
-  return bannersSeleccionados.map(b => {
-    return `
-      <table width="600" cellspacing="0" cellpadding="0" align="center">
-        <tr>
-          <td colspan="2" align="center">
-            <a href="${b.href}" target="_blank">
-              <img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">
-            </a>
-          </td>
-        </tr>
-      </table>
-    `;
-  }).join("\n");
-}
