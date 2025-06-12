@@ -55,17 +55,27 @@ window.addEventListener("DOMContentLoaded", async () => {
   renderizarBanners(bannersJSON, '#listaBanners');
   renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
 
-  // ✅ Inicializa banners recientes antes de renderizar
-  const dataRecientes = localStorage.getItem("bannersRecientes");
-  bannersRecientes = dataRecientes ? JSON.parse(dataRecientes) : [];
+  // ✅ Restaurar recientes desde localStorage al iniciar (forma segura)
+  const recientesGuardados = localStorage.getItem("bannersRecientes");
+  if (recientesGuardados) {
+    try {
+      bannersRecientes = JSON.parse(recientesGuardados);
+    } catch (error) {
+      console.warn("⚠️ Error al parsear bannersRecientes:", error);
+      bannersRecientes = [];
+    }
+  } else {
+    bannersRecientes = [];
+  }
 
-  // ✅ Ahora sí: renderiza recientes con datos
+  // ✅ Renderizar inmediatamente si hay datos
   renderizarRecientes();
 
   console.log("📦 banners cargados:", bannersJSON);
   console.log("📦 cyber cargados:", cyberBannersJSON);
   console.log("🕘 banners recientes:", bannersRecientes);
 });
+
 
 
 
@@ -84,11 +94,11 @@ const box = document.getElementById("sugerencias-banner");
 const input = document.getElementById("buscarBanner");
 
   // 💡 Limpia recientes cuando se empieza una nueva búsqueda
-  if (valor.length === 1) {
+  /*if (valor.length === 1) {
     bannersRecientes = [];
     localStorage.removeItem("bannersRecientes");
     renderizarRecientes();
-  }
+  }*/
 
 // Si el input está vacío, cerramos sugerencias
 if (!valor.trim()) {
@@ -792,13 +802,13 @@ document.addEventListener('DOMContentLoaded', () => {
 function agregarARecientes(banner) {
   bannersRecientes = bannersRecientes.filter(b => b.nombre !== banner.nombre);
   bannersRecientes.unshift(banner);
-  bannersRecientes = bannersRecientes.slice(0, 8);
+  // bannersRecientes = bannersRecientes.slice(0, 8); // Limita a 8 banners recientes
   localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
   renderizarRecientes();
 }
 
-// Renderiza los banners recientes en el contenedor #listaRecientes
-function renderizarRecientes() {
+// Renderiza los banners recientes en el contenedor #listaRecientes Badge
+/*function renderizarRecientes() {
   const cont = document.getElementById("listaRecientes");
 
   if (!cont) return;
@@ -869,7 +879,91 @@ function renderizarRecientes() {
     wrapper.appendChild(closeBtn);
     cont.appendChild(wrapper);
   });
+}*/
+
+
+// Renderiza los banners recientes en el contenedor #listaRecientes spotify
+
+function renderizarRecientes() {
+  const cont = document.getElementById("listaRecientes");
+  if (!cont) return;
+
+  cont.innerHTML = "";
+
+  if (!Array.isArray(bannersRecientes) || bannersRecientes.length === 0) {
+    cont.innerHTML = `<div class="text-secondary px-3 py-2">No hay banners recientes aún.</div>`;
+    return;
+  }
+
+  const titulo = document.createElement("div");
+  titulo.className = "px-2 fw-semibold text-white-50 mb-2";
+  // titulo.textContent = "🕘 Banners recientes usados:";
+  cont.appendChild(titulo);
+
+  bannersRecientes.slice(0, 8).forEach((b) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "banner-item d-flex align-items-center gap-3 px-3 py-2 border-bottom border-secondary";
+    wrapper.style.cursor = "pointer";
+    wrapper.onclick = () => {
+      generarBannerDesdeJson(b);
+      actualizarVistaBanner(b);
+      renderizarRecientes();
+      mostrarToast(`✅ "${b.nombre}" agregado desde recientes`, "success");
+      window.bannerEnVista = b.nombre;
+    };
+
+    const img = document.createElement("img");
+    img.src = b.img_src;
+    img.alt = b.alt || "Banner";
+    img.style.width = "38px";
+    img.style.height = "38px";
+    img.style.objectFit = "cover";
+    img.style.borderRadius = "4px";
+
+    const info = document.createElement("div");
+    info.className = "flex-grow-1";
+    info.innerHTML = `
+      <div class="nombre text-truncate text-light" title="${b.nombre}">${b.nombre}</div>
+      <div class="tipo text-secondary small">• Banner</div>
+    `;
+
+    const closeBtn = document.createElement("button");
+    closeBtn.className = "btn-close btn-close-white btn-sm";
+    closeBtn.style.opacity = 0.6;
+    closeBtn.onclick = (e) => {
+      e.stopPropagation();
+      bannersRecientes = bannersRecientes.filter(r => r.nombre !== b.nombre);
+      localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
+      renderizarRecientes();
+
+      if (window.bannerEnVista === b.nombre) {
+        const preview = document.getElementById("previewHTML");
+        const codigo = document.getElementById("codigoGenerado");
+        const contador = document.getElementById("contadorBanners");
+        const inputBuscar = document.getElementById("buscarBanner");
+
+        if (preview) {
+          preview.innerHTML = `
+            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+              <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
+              <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+            </div>
+          `;
+        }
+        if (codigo) codigo.value = "";
+        if (inputBuscar) inputBuscar.value = "";
+
+        window.bannerEnVista = null;
+      }
+    };
+
+    wrapper.appendChild(img);
+    wrapper.appendChild(info);
+    wrapper.appendChild(closeBtn);
+    cont.appendChild(wrapper);
+  });
 }
+// FinInicializar lista de banners recientes
 
 // Cargar recientes desde localStorage cuando arranca
 window.addEventListener("DOMContentLoaded", () => {

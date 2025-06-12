@@ -378,6 +378,43 @@
 }
 
 
+.banner-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.banner-item {
+  background: transparent;
+  color: #ddd;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.banner-item:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.banner-item .nombre {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.banner-item .tipo {
+  font-size: 0.75rem;
+  color: #888;
+}
+.banner-item img {
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+
+.nombre {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
 
 
 
@@ -413,7 +450,7 @@
 
 
 
-  <div class="container  py-5">
+  <div class="container-fluid p-5  py-5">
     <div class="row align-items-center justify-content-between glass-card">
       <div class="col-md-auto">
         <h2 class="mb-0">🔍 Buscar Banner y Generar HTML</h2>
@@ -469,13 +506,28 @@
 </div>
 
 <!-- Contenedor de banners recientes -->
-<div class="col-12 mt-2">
+<!-- <div class="col-12 mt-2">
   <div id="listaRecientes" class="d-flex flex-wrap gap-2"></div>
+</div> -->
+
+
+<div class="col-3">
+
+  <section class="card card-dark ">
+    <div class="card-body">
+      <h5 class="card-title d-flex gap-2"><i class="bx bx-picture-in-picture-close bx-sm"></i> Banners recientes Usados</h5>
+  
+    <div class="list-group list-group-flush banner-list" id="listaRecientes">
+      <!-- Se insertarán banners aquí -->
+    </div>
+    </div>
+  </section>
+  
 </div>
 
 
 
-    <div class="col-8">
+    <div class="col-6">
     <div class="card card-dark">
       <div class="card-body">
         <h5 class="card-title d-flex gap-2"><i class="bx bx-picture-in-picture-close bx-sm"></i> Vista previa</h5>
@@ -489,7 +541,7 @@
     </div>
   </div>
 
-  <div class="col-4 card card-dark">
+  <div class="col-3 card card-dark">
 
     <h5 class="card-title mt-3 d-flex gap-2"><i class="bx bx-clipboard-code bx-sm"></i>Código HTML AMPscript:</h5>
     <textarea id="codigoGenerado" class="form-control" rows="8" readonly></textarea>
