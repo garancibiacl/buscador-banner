@@ -52,29 +52,21 @@ window.addEventListener("DOMContentLoaded", async () => {
   bannersJSON = await cargarBannersJson("banners.json");
   cyberBannersJSON = await cargarBannersJson("cyber-banner.json");
 
-  renderizarBanners(bannersJSON, '#listaBanners');
-  renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
-
-  // ✅ Restaurar recientes desde localStorage al iniciar (forma segura)
+  // ✅ Restaurar recientes desde localStorage
   const recientesGuardados = localStorage.getItem("bannersRecientes");
   if (recientesGuardados) {
     try {
       bannersRecientes = JSON.parse(recientesGuardados);
-    } catch (error) {
-      console.warn("⚠️ Error al parsear bannersRecientes:", error);
+    } catch {
       bannersRecientes = [];
     }
-  } else {
-    bannersRecientes = [];
   }
 
-  // ✅ Renderizar inmediatamente si hay datos
+  renderizarBanners(bannersJSON, '#listaBanners');
+  renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
   renderizarRecientes();
-
-  console.log("📦 banners cargados:", bannersJSON);
-  console.log("📦 cyber cargados:", cyberBannersJSON);
-  console.log("🕘 banners recientes:", bannersRecientes);
 });
+
 
 
 
