@@ -49,22 +49,21 @@ return resultado;
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
+  // ✅ 1. Cargar recientes al instante, sin esperar JSON
+  const dataRecientes = localStorage.getItem("bannersRecientes");
+  bannersRecientes = dataRecientes ? JSON.parse(dataRecientes) : [];
+  renderizarRecientes(); // 🕘 Mostrar de inmediato
+
+  // ✅ 2. Luego carga banners principales
   bannersJSON = await cargarBannersJson("banners.json");
   cyberBannersJSON = await cargarBannersJson("cyber-banner.json");
 
-  // ✅ Restaurar recientes desde localStorage
-  const recientesGuardados = localStorage.getItem("bannersRecientes");
-  if (recientesGuardados) {
-    try {
-      bannersRecientes = JSON.parse(recientesGuardados);
-    } catch {
-      bannersRecientes = [];
-    }
-  }
-
   renderizarBanners(bannersJSON, '#listaBanners');
   renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
-  renderizarRecientes();
+
+  console.log("📦 banners cargados:", bannersJSON);
+  console.log("📦 cyber cargados:", cyberBannersJSON);
+  console.log("🕘 banners recientes:", bannersRecientes);
 });
 
 
@@ -436,7 +435,7 @@ function limpiarCamposBanner() {
 
   // 🧽 Limpiar recientes
   bannersRecientes = [];
-  //localStorage.removeItem("bannersRecientes");
+  localStorage.removeItem("bannersRecientes");
   renderizarRecientes(); // ← actualiza la vista inmediatamente
 
   // ✅ Toast opcional

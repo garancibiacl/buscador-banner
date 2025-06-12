@@ -460,5 +460,13 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-tiendas-abril.png",
     "alt": "Visitenos"
+  },
+  {
+    "nombre": "HUINCHA 6 CUOTAS SIN INTERES EN CALEFACCIÓN",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/preparate-para-el-invierno?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/Huincha-6-cuotas.png",
+    "alt": "Hasta 6 cuotas sin interes"
   }
+
+
 ]
