@@ -495,6 +495,16 @@ input[type="text"] {
   z-index: 10;
 }
 
+.btn-light {
+  background-color: #f0f0f0;
+  color: #000;
+}
+
+.btn-outline-secondary {
+  border-color: #999;
+  color: #ccc;
+}
+
 
 
 
@@ -531,59 +541,55 @@ input[type="text"] {
 
 
   <div class="container-fluid p-5  py-5">
-    <div class="row align-items-center justify-content-between">
+    <div class="row align-items-center justify-content-between py-2">
 
-      <div class="col-md-2">
-        <button class="btn btn-dark d-flex align-items-center gap-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalCrearBanner">
-          <i class="bx bx-plus bx-xs"></i> Crear Banner
-                </button>
+      <!-- Logo -->
+      <div class="col-md-2 d-flex align-items-center">
+        <img src="assets/img/searcho-logo.png" alt="Searcho logo" style="height: 98px;">
       </div>
     
-
+      <!-- Buscador -->
       <div class="col-md-5">
         <div class="position-relative"> 
-      <div class="search-wrapper">
-        <button class="icon-btn home" title="Inicio">
-          <span class="icon">🏠</span>
-        </button>
+          <div class="search-wrapper">
     
-        <div class="input-wrapper align-items-end">
-          <!-- Ícono de búsqueda aislado -->
-          <span class="icon-search">
-            <i class="bx bx-search bx-sm"></i>
-          </span>
+            <button class="icon-btn home" title="Inicio">
+              <span class="icon">🏠</span>
+            </button>
         
-          <!-- Input principal -->
-          <input
-            type="text"
-            class=""
-            id="buscarBanner"
-            placeholder="Escribe nombre de banner Ej. Catálogo OTIN..."
-            oninput="sugerenciasBannerSimple(this.value); activarBotonLimpiar()"
-            onclick="activarBotonLimpiar()"
-          />
-        
-          <!-- Botones -->
-          <button id="btnClearInput"
-          class="btn btn-sm  position-absolute top-50 end-0  translate-middle-y me-2 d-none"
-          onclick="limpiarInputBuscar()" type="button">❌</button>
-         
+            <div class="input-wrapper align-items-end">
+              <span class="icon-search">
+                <i class="bx bx-search bx-sm"></i>
+              </span>
+            
+              <input
+                type="text"
+                id="buscarBanner"
+                placeholder="Escribe nombre de banner Ej. Catálogo OTIN..."
+                oninput="sugerenciasBannerSimple(this.value); activarBotonLimpiar()"
+                onclick="activarBotonLimpiar()"
+              />
+            
+              <button id="btnClearInput"
+                      class="btn btn-sm position-absolute top-50 end-0 translate-middle-y me-2 d-none"
+                      onclick="limpiarInputBuscar()" type="button">❌</button>
+            </div>
+    
+          </div>
+          <div id="sugerencias-banner" class="suggestion-box d-none"></div>
         </div>
-        
       </div>
-      <div id="sugerencias-banner" class="suggestion-box d-none"></div>
-    </div>
-   
-      </div>
-
-
+    
+      <!-- Botón Crear -->
       <div class="col-md-auto d-flex gap-2">
-     
-        <button onclick="limpiarCamposBanner()" class="btn btn-outline-secondary d-flex align-items-center gap-2 rounded-pill">
-          <i class="bx bx-brush bx-sm"></i> Limpiar todo
+        <button class="btn btn-dark d-flex align-items-center gap-2 rounded-pill"
+                data-bs-toggle="modal" data-bs-target="#modalCrearBanner">
+          <i class="bx bx-plus bx-xs"></i> Crear Banner
         </button>
       </div>
+    
     </div>
+    
 
 
 
@@ -670,9 +676,22 @@ input[type="text"] {
     <div class="card-body">
     <h6 class="card-title d-flex gap-2 fw-normal align-items-center mb-3"><i class="bx bx-clipboard-code bx-sm"></i> Código HTML</h6>
     <textarea id="codigoGenerado" class="form-control" rows="8" readonly></textarea>
-    <div class="d-flex justify-content-end">
-    <button onclick="copiarCodigo()" class="align-items-center btn btn-light d-flex gap-2 mt-3 rounded-pill"><i class="bx bx-copy bx-xs"></i>Copiar HTML</button>
-  </div>
+    <div class="col-12 d-flex justify-content-end gap-2 mt-3 flex-wrap">
+
+      <!-- Botón Copiar -->
+      <button onclick="copiarCodigo()"
+              class="btn btn-light d-flex align-items-center gap-2 rounded-pill">
+        <i class="bx bx-copy bx-xs"></i> Copiar HTML
+      </button>
+    
+      <!-- Botón Limpiar -->
+      <button onclick="limpiarCamposBanner()"
+              class="btn btn-outline-secondary d-flex align-items-center gap-2 rounded-pill">
+        <i class="bx bx-brush bx-sm"></i> Limpiar todo
+      </button>
+    
+    </div>
+    
 
   </div>
 
