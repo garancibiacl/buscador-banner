@@ -257,7 +257,6 @@ function eliminarBanner(index, boton) {
 
 function generarHTMLDesdeSeleccionados() {
   if (bannersSeleccionados.length === 0) {
-    // 🧠 Si no hay banners seleccionados, mostramos recientes automáticamente
     renderizarRecientes();
 
     return `
@@ -281,27 +280,28 @@ function generarHTMLDesdeSeleccionados() {
       </table>
     `;
 
-    const botonEditar = `
-      <div class="mt-2 d-flex justify-content-end gap-2">
+    const pieBanner = `
+      <div class="d-flex justify-content-between align-items-center mt-2 flex-wrap">
+        <div class="nombre-banner-inferior text-truncate">${b.nombre || '📛 Sin nombre'}</div>
+        <div class="d-flex gap-2 mt-2 mt-sm-0">
+          <button class="tooltip-btn btn btn-dark btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+                  onclick="abrirModalEditar(${index})"
+                  style="font-size: 0.85rem;">
+            <i class="bx bx-edit-alt bx-xs"></i> Editar
+            <span class="tooltip-text">Editar banner</span>
+          </button>
 
-        <button class="tooltip-btn btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
-                onclick="abrirModalEditar(${index})"
-                style="font-size: 0.85rem;">
-          <i class="bx bx-edit-alt bx-xs"></i> Editar
-          <span class="tooltip-text">Editar banner</span>
-        </button>
-
-        <button class="tooltip-btn btn btn-danger btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
-                onclick="eliminarBanner(${index}, this)"
-                style="font-size: 0.85rem;">
-          <i class="bx bx-trash bx-xs"></i> Eliminar
-          <span class="tooltip-text">Eliminar banner</span>
-        </button>
-
+          <button class="tooltip-btn btn btn-danger btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+                  onclick="eliminarBanner(${index}, this)"
+                  style="font-size: 0.85rem;">
+            <i class="bx bx-trash bx-xs"></i> Eliminar
+            <span class="tooltip-text">Eliminar banner</span>
+          </button>
+        </div>
       </div>
     `;
 
-    return `<div id="fila-banner-${index}" class="mb-4">${tabla}${botonEditar}</div>`;
+    return `<div id="fila-banner-${index}" class="mb-4">${tabla}${pieBanner}</div>`;
   }).join("\n");
 }
 
