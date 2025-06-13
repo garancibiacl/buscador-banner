@@ -399,7 +399,7 @@ if (!contador) {
 contador.textContent = `${total} banner${total !== 1 ? 's' : ''} agregados 🎯`;
 
 // 🎨 Visual style
-contador.className = `glass-badge px-3 py-2 rounded-pill  ${
+contador.className = `glass-badge px-3 rounded-pill  ${
   total === cantidadMaxima ? 'glass-badge' : 'glass-badge'
 }`;
 
