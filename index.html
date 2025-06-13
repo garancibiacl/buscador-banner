@@ -90,7 +90,7 @@
 
 
 .glass-card {
-      background: rgba(255, 255, 255, 0.05);
+      /* background: rgba(255, 255, 255, 0.05); */
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 1rem;
       backdrop-filter: blur(8px);
@@ -415,6 +415,60 @@
   font-size: 0.95rem;
 }
 
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #1e1e1e;
+  border-radius: 30px;
+  padding: 8px 12px;
+  gap: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  /* max-width: 700px; */
+  width: 100%;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a;
+  border-radius: 30px;
+  flex-grow: 1;
+  padding: 4px 10px;
+  position: relative;
+}
+
+input[type="text"] {
+  background: transparent;
+  border: none;
+  color: white;
+  flex-grow: 1;
+  font-size: 1rem;
+  padding: 8px;
+  outline: none;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  padding: 6px;
+  opacity: 0.8;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background-color: #555;
+  margin: 0 8px;
+}
 
 
 
@@ -451,12 +505,50 @@
 
 
   <div class="container-fluid p-5  py-5">
-    <div class="row align-items-center justify-content-between glass-card">
-      <div class="col-md-auto">
-        <h2 class="mb-0">🔍 Buscar Banner y Generar HTML</h2>
+    <div class="row align-items-center justify-content-between">
+
+      <div class="col-md-2">
+        <h5 class="mb-0"><i class="bx bx-search-big bx-xs"></i>Buscar Banner</h5>
       </div>
     
-      <div class="col-md-auto ms-auto d-flex gap-2">
+
+      <div class="col-md-5">
+        <div class="position-relative mb-4"> 
+      <div class="search-wrapper">
+        <button class="icon-btn home" title="Inicio">
+          <span class="icon">🏠</span>
+        </button>
+    
+        <div class="input-wrapper align-items-end">
+          <!-- Ícono de búsqueda aislado -->
+          <span class="icon-search">
+            <i class="bx bx-search bx-sm"></i>
+          </span>
+        
+          <!-- Input principal -->
+          <input
+            type="text"
+            class=""
+            id="buscarBanner"
+            placeholder="¿Qué quieres reproducir?"
+            oninput="sugerenciasBannerSimple(this.value); activarBotonLimpiar()"
+            onclick="activarBotonLimpiar()"
+          />
+        
+          <!-- Botones -->
+          <button id="clearBtn" class="icon-btn clear" title="Limpiar búsqueda">❌</button>
+          <div class="divider"></div>
+          <button class="icon-btn save" title="Guardar búsqueda">🧺</button>
+        </div>
+        
+      </div>
+      <div id="sugerencias-banner" class="suggestion-box d-none"></div>
+    </div>
+   
+      </div>
+
+
+      <div class="col-md-auto d-flex gap-2">
         <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalCrearBanner">
           <i class="bx bx-plus-circle bx-sm"></i> Crear Banner
                 </button>
@@ -465,29 +557,38 @@
         </button>
       </div>
     </div>
+
+
+
+
+
+
+
+    
     
   <br>
     <div class="row glass-card p-4">
 
-<div class="row d-flex">
-  <div class="col-12">
+<div class="row d-flex justify-content-center">
+  <div class="col-8 ">
     <div class="position-relative mb-4">
-             <div class="input-group flex-nowrap">
+             <!-- <div class="input-group flex-nowrap">
               <span class="input-group-text d-flex gap-1" id="addon-wrapping">
                 <i class="bx bx-search-big bx-xs"></i>Buscar Banner</span>
 
            
               <input type="text" class="form-control" id="buscarBanner" placeholder="Escribe nombre de banner Ej. Catálogo OTIN..." aria-label="Username" aria-describedby="addon-wrapping" oninput="sugerenciasBannerSimple(this.value); activarBotonLimpiar()"
               onclick="activarBotonLimpiar()">
-            </div>
-        
+            </div> -->
+
+         
   
     <!--BOTON CLOSE INPUT
       <button id="btnClearInput"
               class="btn btn-sm  position-absolute top-50 end-0  translate-middle-y me-2 d-none"
               onclick="limpiarInputBuscar()" type="button">❌</button>-->
     
-      <div id="sugerencias-banner" class="suggestion-box d-none"></div>
+ 
     </div>
   </div>
 

@@ -73,6 +73,9 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
 
+
+
+
 function actualizarCantidad(select) {
 cantidadMaxima = parseInt(select.value);
 bannersSeleccionados = [];
@@ -970,3 +973,12 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 // FIN DE LISTAS RECIENTES
+
+
+const searchInput = document.getElementById("searchInput");
+const clearBtn = document.getElementById("clearBtn");
+
+clearBtn.addEventListener("click", () => {
+  searchInput.value = "";
+  searchInput.focus();
+});
