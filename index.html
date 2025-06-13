@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Buscar Banners</title>
-  <link rel="icon" type="image/png" href="/buscar.png">
+  <link rel="icon" type="image/png" href="/searcho-logo.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,7 +85,21 @@
 }
 
 
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #2a2a2a;
+  border-radius: 30px;
+  padding: 4px 10px;
+  position: relative;
+  gap: 10px;
+  transition: border 0.2s ease;
+  border: 2px solid transparent;
+}
 
+.input-wrapper:focus-within {
+  border: 2px solid #fff; /* Borde blanco al hacer focus */
+}
 
 
 
@@ -553,9 +567,7 @@ input[type="text"] {
         <div class="position-relative"> 
           <div class="search-wrapper">
     
-            <button class="icon-btn home" title="Inicio">
-              <span class="icon">🏠</span>
-            </button>
+         
         
             <div class="input-wrapper align-items-end">
               <span class="icon-search">
@@ -574,7 +586,10 @@ input[type="text"] {
                       class="btn btn-sm position-absolute top-50 end-0 translate-middle-y me-2 d-none"
                       onclick="limpiarInputBuscar()" type="button">❌</button>
             </div>
-    
+            <div class="divider"></div>
+            <button class="icon-btn home" title="Inicio">
+              <span class="icon">🏠</span>
+            </button>    
           </div>
           <div id="sugerencias-banner" class="suggestion-box d-none"></div>
         </div>
@@ -686,7 +701,7 @@ input[type="text"] {
     
       <!-- Botón Limpiar -->
       <button onclick="limpiarCamposBanner()"
-              class="btn btn-outline-secondary d-flex align-items-center gap-2 rounded-pill">
+              class="btn btn-dark d-flex align-items-center gap-2 rounded-pill">
         <i class="bx bx-brush bx-sm"></i> Limpiar todo
       </button>
     
