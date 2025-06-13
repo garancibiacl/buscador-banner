@@ -90,13 +90,11 @@
 
 
 .glass-card {
-      /* background: rgba(255, 255, 255, 0.05); */
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 1rem;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-      padding: 2rem;
     }
 
     .glass-input {
@@ -175,8 +173,7 @@
   max-height: 450px;
   overflow-y: auto;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: #212529;
+
 }
 
 /* Scroll oscuro bonito */
@@ -478,7 +475,7 @@ input[type="text"] {
 
 
 
-<!-- 🔄 Loader Estilo Cuadrícula + Frase inspiradora -->
+<!-- 🔄 Loader Estilo Cuadrícula + Frase inspiradora 
 <div class="loader" id="loaderOverlay">
   <div class="loader-grid">
     <div class="square" id="sq1"></div>
@@ -492,11 +489,11 @@ input[type="text"] {
     <div class="square" id="sq9"></div>
   </div>
 
-  <!-- 🌟 Frase abajo -->
+   🌟 Frase abajo 
   <div class="loader-text mt-4 small text-light">
     <em>Inspirando ideas...</em>
   </div>
-</div>
+</div> -->
 
 
 
@@ -508,12 +505,14 @@ input[type="text"] {
     <div class="row align-items-center justify-content-between">
 
       <div class="col-md-2">
-        <h5 class="mb-0"><i class="bx bx-search-big bx-xs"></i>Buscar Banner</h5>
+        <button class="btn btn-dark d-flex align-items-center gap-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalCrearBanner">
+          <i class="bx bx-plus bx-xs"></i> Crear Banner
+                </button>
       </div>
     
 
       <div class="col-md-5">
-        <div class="position-relative mb-4"> 
+        <div class="position-relative"> 
       <div class="search-wrapper">
         <button class="icon-btn home" title="Inicio">
           <span class="icon">🏠</span>
@@ -530,15 +529,16 @@ input[type="text"] {
             type="text"
             class=""
             id="buscarBanner"
-            placeholder="¿Qué quieres reproducir?"
+            placeholder="Escribe nombre de banner Ej. Catálogo OTIN..."
             oninput="sugerenciasBannerSimple(this.value); activarBotonLimpiar()"
             onclick="activarBotonLimpiar()"
           />
         
           <!-- Botones -->
-          <button id="clearBtn" class="icon-btn clear" title="Limpiar búsqueda">❌</button>
-          <div class="divider"></div>
-          <button class="icon-btn save" title="Guardar búsqueda">🧺</button>
+          <button id="btnClearInput"
+          class="btn btn-sm  position-absolute top-50 end-0  translate-middle-y me-2 d-none"
+          onclick="limpiarInputBuscar()" type="button">❌</button>
+         
         </div>
         
       </div>
@@ -549,10 +549,8 @@ input[type="text"] {
 
 
       <div class="col-md-auto d-flex gap-2">
-        <button class="btn btn-primary d-flex align-items-center gap-2" data-bs-toggle="modal" data-bs-target="#modalCrearBanner">
-          <i class="bx bx-plus-circle bx-sm"></i> Crear Banner
-                </button>
-        <button onclick="limpiarCamposBanner()" class="btn btn-outline-light d-flex align-items-center gap-2">
+     
+        <button onclick="limpiarCamposBanner()" class="btn btn-outline-secondary d-flex align-items-center gap-2 rounded-pill">
           <i class="bx bx-brush bx-sm"></i> Limpiar todo
         </button>
       </div>
@@ -567,9 +565,9 @@ input[type="text"] {
     
     
   <br>
-    <div class="row glass-card p-4">
+    <div class="d-flex gap-2 ">
 
-<div class="row d-flex justify-content-center">
+<div class="d-flex justify-content-center">
   <div class="col-8 ">
     <div class="position-relative mb-4">
              <!-- <div class="input-group flex-nowrap">
@@ -597,14 +595,7 @@ input[type="text"] {
 
 </div>
 
-<div class="col-12">
-  <div class="mb-3">
-    
-    <span id="contadorBanners" class="glass-badge px-3 py-2 rounded-pill">
-      0 banners agregados 🎯
-    </span>
-  </div>
-</div>
+
 
 <!-- Contenedor de banners recientes -->
 <!-- <div class="col-12 mt-2">
@@ -612,15 +603,15 @@ input[type="text"] {
 </div> -->
 
 
-<div class="col-3">
+<div class="col-3 glass-card rounded-3">
 
-  <section class="card card-dark ">
-    <div class="card-body">
-      <h5 class="card-title d-flex gap-2"><i class="bx bx-menu-select bx-sm"></i> Banners recientes Usados</h5>
+  <section class="card-body p-3">
+   
+      <h6 class="card-title d-flex gap-2 fw-normal align-items-center"><i class="bx bx-menu-select bx-sm"></i> Banners recientes Usados</h6>
   
     <div class="list-group list-group-flush banner-list" id="listaRecientes">
       <!-- Se insertarán banners aquí -->
-    </div>
+    
     </div>
   </section>
   
@@ -628,37 +619,47 @@ input[type="text"] {
 
 
 
-    <div class="col-6">
-    <div class="card card-dark">
+    <div class="col-6 glass-card p-3 rounded-3">
       <div class="card-body">
-        <h5 class="card-title d-flex gap-2"><i class="bx bx-picture-in-picture-close bx-sm"></i> Vista previa</h5>
-        <div id="previewHTML" class="preview-scroll bg-dark text-white rounded-4 p-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
+        <div class="d-flex justify-content-between align-items-center ">
+        <h6 class="card-title d-flex gap-2 fw-normal align-items-center"><i class="bx bx-picture-in-picture-close bx-sm"></i> Vista previa</h6>
+            <span id="contadorBanners" class="mb-2 badge px-3 rounded-pill">
+              0 banners agregados 🎯
+            </span>
+         
+        </div>
+        <div id="previewHTML" class="preview-scroll text-white  p-4 d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
           <i class="bx bx-image-alt" style="font-size: 4rem; opacity: 0.3;"></i>
-          <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
+          <p class="mt-2 mb-0 text-white-50">Esperando selección del banner...</p>
         </div>
         
         
       </div>
-    </div>
   </div>
 
-  <div class="col-3 card card-dark">
-
-    <h5 class="card-title mt-3 d-flex gap-2"><i class="bx bx-clipboard-code bx-sm"></i>Código HTML AMPscript:</h5>
+  <div class="col-3 glass-card p-3 rounded-3">
+    <div class="card-body">
+    <h6 class="card-title d-flex gap-2 fw-normal align-items-center mb-3"><i class="bx bx-clipboard-code bx-sm"></i> Código HTML</h6>
     <textarea id="codigoGenerado" class="form-control" rows="8" readonly></textarea>
-    <button onclick="copiarCodigo()" class="btn btn-light mt-3 mb-3 d-flex justify-content-center gap-2"><i class="bx bx-copy bx-sm"></i>Copiar HTML</button>
+    <div class="d-flex justify-content-end">
+    <button onclick="copiarCodigo()" class="align-items-center btn btn-light d-flex gap-2 mt-3 rounded-pill"><i class="bx bx-copy bx-xs"></i>Copiar HTML</button>
+  </div>
+
+  </div>
 
   </div>
 
 
 
+
+
+  </div>
 
   <div class="col-4 mt-2">
-  <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modalTransformador">
-    🧩 Tabla HTML a JSON
-  </button>
-
-</div>
+    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modalTransformador">
+      🧩 Tabla HTML a JSON
+    </button>
+  
   </div>
 
 
