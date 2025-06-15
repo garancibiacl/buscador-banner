@@ -587,9 +587,13 @@ input[type="text"] {
                       onclick="limpiarInputBuscar()" type="button">❌</button>
             </div>
             <div class="divider"></div>
-            <button class="icon-btn home" title="Inicio">
-              <span class="icon">🏠</span>
+            <button class="icon-btn home tooltip-btn"  data-bs-toggle="modal" data-bs-target="#modalTransformador">
+              <span class="icon-search"> 
+                <i class="bx bx-message-code bx-sm"></i>
+                <span class="tooltip-text">Agregar tabla a json</span>
+              </span>
             </button>    
+
           </div>
           <div id="sugerencias-banner" class="suggestion-box d-none"></div>
         </div>
@@ -695,14 +699,14 @@ input[type="text"] {
 
       <!-- Botón Copiar -->
       <button onclick="copiarCodigo()"
-              class="btn btn-light d-flex align-items-center gap-2 rounded-pill">
-        <i class="bx bx-copy bx-xs"></i> Copiar HTML
+              class="btn btn-light d-flex align-items-center gap-2 rounded-pill ">
+        <i class="bx bx-copy bx-xs"></i> Copiar Html
       </button>
     
       <!-- Botón Limpiar -->
       <button onclick="limpiarCamposBanner()"
-              class="btn btn-dark d-flex align-items-center gap-2 rounded-pill">
-        <i class="bx bx-brush bx-sm"></i> Limpiar todo
+              class="btn btn-dark d-flex align-items-center gap-2 rounded-pill tooltip-btn">
+        <i class="bx bx-brush bx-xs"></i> Limpiar Todo
       </button>
     
     </div>
@@ -718,12 +722,7 @@ input[type="text"] {
 
   </div>
 
-  <div class="col-4 mt-2">
-    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#modalTransformador">
-      🧩 Tabla HTML a JSON
-    </button>
-  
-  </div>
+
 
 
   </div>
