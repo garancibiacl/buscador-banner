@@ -466,7 +466,35 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/preparate-para-el-invierno?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/Huincha-6-cuotas.png",
     "alt": "Hasta 6 cuotas sin interes"
+  },
+  {
+    "nombre": "Banner cabiaton bateria pro",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/static/bases/notalegal-cambiaton-baterias-2025.pdf?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Cambiaton-de-bateria-co.png",
+    "alt": "Ir a cambiaton"
+  },
+  {
+    "nombre": "BANNER doble acumulación",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/static/bases/bl-promocion-doble-acumulacion-cmr-otono-invierno-calefaccion.pdf?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-doble-acumulacion.png",
+    "alt": "Ir doble acumulacion"
+  },
+  {
+    "nombre": "BANNER doble acumulación",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/static/bases/bl-promocion-doble-acumulacion-cmr-otono-invierno-calefaccion.pdf?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-doble-acumulacion.png",
+    "alt": "Ir doble acumulacion"
+  },
+  {
+    "nombre": "BANNER cambiaton baterias",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/static/bases/notalegal-cambiaton-baterias-2025.pdf?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Cambiaton-baterias-HOGAR.png",
+    "alt": "Ir a bases legales"
+  },
+  {
+    "nombre": "BANNER TIENDAS OTIN",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/preparate-para-el-invierno?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/16-banner-mao-v2.png",
+    "alt": "Ir a TIENDAS OTIN"
   }
-
-
 ]
