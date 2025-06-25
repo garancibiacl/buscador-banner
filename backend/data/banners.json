@@ -490,5 +490,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/preparate-para-el-invierno?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/16-banner-mao-v2.png",
     "alt": "Ir a TIENDAS OTIN"
+  },
+  {
+    "nombre": "BANNER ASEO",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG10598/Aseo-y-limpieza?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-aseo.png",
+    "alt": "Ir Aseo  y limpieza"
   }
 ]
