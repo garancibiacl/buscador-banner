@@ -474,16 +474,10 @@
     "alt": "Ir a cambiaton"
   },
   {
-    "nombre": "BANNER doble acumulación",
-    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/static/bases/bl-promocion-doble-acumulacion-cmr-otono-invierno-calefaccion.pdf?',@prefix))=%%",
+    "nombre": "Doble acumulacion de puntos CMR",
+    "href": "https://www.sodimac.cl/static/bases/bl-promocion-doble-acumulacion-cmr-otono-invierno-calefaccion.pdf",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-doble-acumulacion.png",
-    "alt": "Ir doble acumulacion"
-  },
-  {
-    "nombre": "BANNER doble acumulación",
-    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/static/bases/bl-promocion-doble-acumulacion-cmr-otono-invierno-calefaccion.pdf?',@prefix))=%%",
-    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-doble-acumulacion.png",
-    "alt": "Ir doble acumulacion"
+    "alt": "Doble acumulacion de puntos CMR"
   },
   {
     "nombre": "BANNER cambiaton baterias",
