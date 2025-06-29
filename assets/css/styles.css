@@ -4,15 +4,17 @@ body {
   color: #f8f9fa;
   font-family: 'Segoe UI', sans-serif;
 }
+
+
 .suggestion-box {
   position: absolute;
   z-index: 999;
-  background-color: #212529; /* dark */
+  background-color: #1e1e1e; /* dark */
   color: #f8f9fa; /* light */
   border: 1px solid #444;
   width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
+  /* max-height: 200px;
+  overflow-y: auto; */
   border-radius: 0.375rem;
 }
 
@@ -171,7 +173,6 @@ to { transform: rotate(360deg); }
 .preview-scroll {
 max-height: 450px;
 overflow-y: auto;
-position: relative;
 
 }
 
@@ -377,7 +378,7 @@ border-radius: 4px;
 
 
 .banner-list {
-max-height: 400px;
+max-height: 480px;
 overflow-y: auto;
 }
 
@@ -508,7 +509,6 @@ color: #ccc;
 }
 
 .banner-list, .banner-item {
-overflow: visible !important;
 position: relative !important;
 z-index: 9999;
 }

@@ -88,7 +88,7 @@
             </button>    
 
           </div>
-          <div id="sugerencias-banner" class="suggestion-box d-none"></div>
+          <div id="sugerencias-banner" class="suggestion-box preview-scroll  d-none"></div>
         </div>
       </div>
     
@@ -156,7 +156,7 @@
    
       <h6 class="card-title d-flex gap-2 fw-normal align-items-center"><i class="bx bx-menu-select bx-sm"></i> Banners recientes Usados</h6>
   
-    <div class="list-group list-group-flush banner-list" id="listaRecientes">
+    <div class="preview-scroll list-group list-group-flush banner-list" id="listaRecientes">
       <!-- Se insertarán banners aquí -->
     
     </div>
@@ -187,7 +187,7 @@
   <div class="col-3 glass-card p-3 rounded-3">
     <div class="card-body">
     <h6 class="card-title d-flex gap-2 fw-normal align-items-center mb-3"><i class="bx bx-clipboard-code bx-sm"></i> Código HTML</h6>
-    <textarea id="codigoGenerado" class="form-control" rows="8" readonly></textarea>
+    <textarea id="codigoGenerado" class="preview-scroll form-control" rows="8" readonly></textarea>
     <div class="col-12 d-flex justify-content-end gap-2 mt-3 flex-wrap">
 
       <!-- Botón Copiar -->
@@ -250,8 +250,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-success" onclick="guardarCambiosBanner()">Guardar</button>
+        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-light" onclick="guardarCambiosBanner()">Guardar</button>
       </div>
     </div>
   </div>
@@ -262,9 +262,9 @@
   <div class="modal-dialog">
     <div class="modal-content bg-dark text-white">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalCrearBannerLabel">Crear Nuevo Banner</h5>
+        <h5 class="modal-title d-flex gap-2" id="modalCrearBannerLabel"><i class="bx bx-light-bulb bx-sm"></i> Crear Nuevo Banner</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
+      </div>  
       <div class="modal-body">
         <input id="nuevoNombre" type="text" class="form-control mb-2" placeholder="Nombre del banner">
         <input id="nuevoHref" type="text" class="form-control mb-2" placeholder="Enlace (href)">
@@ -321,7 +321,7 @@
         <h5 class="modal-title" id="modalAyudaLabel">🧭 Guía rápida de uso del Buscador de Banners</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
       </div>
-      <div class="modal-body text-start" id="contenidoAyuda" style="white-space: pre-wrap; font-size: 0.95rem;">
+      <div class="preview-scroll modal-body text-start" id="contenidoAyuda" style="white-space: pre-wrap; font-size: 0.95rem;">
         <div class="text-secondary">Cargando contenido...</div>
       </div>
     </div>

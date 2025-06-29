@@ -794,9 +794,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Agrega un banner a los recientes (máximo 8)
 function agregarARecientes(banner) {
-  bannersRecientes = bannersRecientes.filter(b => b.nombre !== banner.nombre);
-  bannersRecientes.unshift(banner);
-  // bannersRecientes = bannersRecientes.slice(0, 8); // Limita a 8 banners recientes
+  const index = bannersRecientes.findIndex(b => b.nombre === banner.nombre);
+
+  if (index !== -1) {
+    // Si ya existe, aumentar contador
+    bannersRecientes[index].usos = (bannersRecientes[index].usos || 0) + 1;
+  } else {
+    // Si es nuevo, agregarlo con contador
+    banner.usos = 1;
+    bannersRecientes.unshift(banner);
+  }
+
   localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
   renderizarRecientes();
 }
@@ -894,7 +902,7 @@ function renderizarRecientes() {
   // titulo.textContent = "🕘 Banners recientes usados:";
   cont.appendChild(titulo);
 
-  bannersRecientes.slice(0, 8).forEach((b) => {
+  bannersRecientes.slice(0, 20).forEach((b) => {
     const wrapper = document.createElement("div");
     wrapper.className = "banner-item d-flex align-items-center gap-3 px-3 py-2";
     wrapper.style.cursor = "pointer";
@@ -915,11 +923,21 @@ function renderizarRecientes() {
     img.style.borderRadius = "4px";
 
     const info = document.createElement("div");
+// Detectar tipo según el nombre
+let tipo = "Banner";
+let tipoClase = "badge text-bg-info";
+
+if (/^huincha/i.test(b.nombre)) {
+  tipo = "Huincha";
+  tipoClase = "badge text-bg-warning";
+}
+
     info.className = "flex-grow-1";
     info.innerHTML = `
-      <div class="nombre text-truncate text-light" title="${b.nombre}">${b.nombre}</div>
-      <div class="tipo text-secondary small">• Banner</div>
-    `;
+    <div class="nombre text-truncate text-light" title="${b.nombre}">${b.nombre}</div>
+    <div class="tipo mt-1"><span class="${tipoClase}"> ${tipo}</span></div>
+  `;
+  
 
     const closeBtn = document.createElement("button");
     closeBtn.className = "tooltip-btn";
@@ -927,6 +945,7 @@ function renderizarRecientes() {
 closeBtn.style.boxShadow = "none";         // ❌ Elimina sombra por si acaso
 closeBtn.style.border = "none";            // ❌ Asegura que no tenga bordes
 closeBtn.style.opacity = "0.7";  
+closeBtn.style.fontSize = "1.3rem";  
 closeBtn.style.zIndex = 9999; 
 
 // Agregar el tooltip como un span hijo
