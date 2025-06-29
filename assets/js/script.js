@@ -876,7 +876,7 @@ function agregarARecientes(banner) {
 }*/
 
 
-// Renderiza los banners recientes en el contenedor #listaRecientes spotify
+// Renderiza los banners recientes en el contenedor #listaRecientes 
 
 function renderizarRecientes() {
   const cont = document.getElementById("listaRecientes");
@@ -896,7 +896,7 @@ function renderizarRecientes() {
 
   bannersRecientes.slice(0, 8).forEach((b) => {
     const wrapper = document.createElement("div");
-    wrapper.className = "banner-item d-flex align-items-center gap-3 px-3 py-2 border-bottom border-secondary";
+    wrapper.className = "banner-item d-flex align-items-center gap-3 px-3 py-2";
     wrapper.style.cursor = "pointer";
     wrapper.onclick = () => {
       generarBannerDesdeJson(b);
@@ -922,8 +922,24 @@ function renderizarRecientes() {
     `;
 
     const closeBtn = document.createElement("button");
-    closeBtn.className = "btn-close btn-close-white btn-sm";
-    closeBtn.style.opacity = 0.6;
+    closeBtn.className = "tooltip-btn";
+    closeBtn.style.background = "transparent"; // ❌ Elimina fondo gris
+closeBtn.style.boxShadow = "none";         // ❌ Elimina sombra por si acaso
+closeBtn.style.border = "none";            // ❌ Asegura que no tenga bordes
+closeBtn.style.opacity = "0.7";  
+closeBtn.style.zIndex = 9999; 
+
+// Agregar el tooltip como un span hijo
+const tooltip = document.createElement("span");
+tooltip.className = "tooltip-text";
+tooltip.textContent = "Eliminar";
+
+// Asegúrate de que el botón tenga algo visual si la clase no lo muestra
+closeBtn.innerHTML = "&times;"; // Alternativa visual si la clase falla
+
+// Añadir tooltip al botón
+closeBtn.appendChild(tooltip);
+
     closeBtn.onclick = (e) => {
       e.stopPropagation();
       bannersRecientes = bannersRecientes.filter(r => r.nombre !== b.nombre);
@@ -949,6 +965,7 @@ function renderizarRecientes() {
 
         window.bannerEnVista = null;
       }
+      
     };
 
     wrapper.appendChild(img);
