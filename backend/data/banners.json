@@ -496,5 +496,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG10598/Aseo-y-limpieza?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-aseo.png",
     "alt": "Ir Aseo  y limpieza"
+  },
+  {
+    "nombre": "Huincha Mascotas",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat9360001/Mascotas ?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/02-mascotas-huincha.png",
+    "alt": "Mascotas"
   }
 ]
