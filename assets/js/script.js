@@ -925,11 +925,11 @@ function renderizarRecientes() {
     const info = document.createElement("div");
 // Detectar tipo según el nombre
 let tipo = "Banner";
-let tipoClase = "badge text-bg-info";
+let tipoClase = "badge badge-green";
 
 if (/^huincha/i.test(b.nombre)) {
   tipo = "Huincha";
-  tipoClase = "badge text-bg-warning";
+  tipoClase = "badge badge-orange";
 }
 
     info.className = "flex-grow-1";

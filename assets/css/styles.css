@@ -514,5 +514,18 @@ z-index: 9999;
 }
 
 
+.badge-green {
+  background-color: #b0eac4;
+  color: #222;
+  font-size: 0.7rem;
+  font-weight: normal;
+}
+
+.badge-orange {
+  background-color: #ffcba4;
+  color: #222;
+  font-size: 0.7rem;
+  font-weight: normal;
+}
 
 
