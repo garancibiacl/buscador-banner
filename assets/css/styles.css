@@ -240,7 +240,9 @@ opacity: 1;
 .tooltip-guia {
   bottom: 120%;
 }
-
+.tooltip-json{
+  bottom: -50%;
+}
 
 @keyframes fadeIn {
 to { opacity: 1; }
