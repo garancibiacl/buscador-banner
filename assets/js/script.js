@@ -950,7 +950,7 @@ closeBtn.style.zIndex = 9999;
 
 // Agregar el tooltip como un span hijo
 const tooltip = document.createElement("span");
-tooltip.className = "tooltip-text";
+tooltip.className = "tooltip-close tooltip-text";
 tooltip.textContent = "Eliminar";
 
 // Asegúrate de que el botón tenga algo visual si la clase no lo muestra

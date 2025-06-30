@@ -219,7 +219,7 @@ padding: 6px 10px;
 border-radius: 6px;
 position: absolute;
 z-index: 9999;
-bottom: 125%; /* arriba del botón */
+bottom: -130% ;
 left: 50%;
 transform: translateX(-50%);
 white-space: nowrap;
@@ -231,6 +231,14 @@ transition: opacity 0.3s;
 .tooltip-btn:hover .tooltip-text {
 visibility: visible;
 opacity: 1;
+}
+
+.tooltip-close{
+  bottom: -50% ;
+
+}
+.tooltip-guia {
+  bottom: 120%;
 }
 
 
@@ -514,18 +522,23 @@ z-index: 9999;
 }
 
 
-.badge-green {
-  background-color: #b0eac4;
+.badge-green,
+.badge-orange {
   color: #222;
   font-size: 0.7rem;
   font-weight: normal;
+  padding: 2px 8px;
+  border-radius: 999px;
+  line-height: 1;
+  display: inline-block;
+}
+
+.badge-green {
+  background-color: #b0eac4;
 }
 
 .badge-orange {
   background-color: #ffcba4;
-  color: #222;
-  font-size: 0.7rem;
-  font-weight: normal;
 }
 
 
