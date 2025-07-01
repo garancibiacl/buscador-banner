@@ -199,7 +199,6 @@ font-size: 0.85rem;
 border-radius: 6px;
 cursor: pointer;
 transition: background 0.2s ease-in-out;
-z-index: 9999 !important;
 }
 
 .tooltip-btn:hover {
@@ -544,3 +543,12 @@ z-index: 9999;
 }
 
 
+.modal-content { max-width: 600px; margin: auto; }
+.modal-body .form-control:focus {
+  box-shadow: none;
+  border-color: #fff;
+}
+.modal-body .form-label {
+  letter-spacing: 0.05em;
+  color: #bbb;
+}

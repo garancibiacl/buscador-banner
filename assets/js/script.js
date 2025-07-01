@@ -512,7 +512,7 @@ requestAnimationFrame(() => {
 
   setTimeout(() => {
     loader.style.opacity = "0";
-    setTimeout(() => loader.remove(), 400); // coincide con transición CSS
+    setTimeout(() => loader.remove(), 500); // coincide con transición CSS
   }, restante);
 });
 });
