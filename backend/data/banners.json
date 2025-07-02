@@ -502,5 +502,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat9360001/Mascotas ?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/02-mascotas-huincha.png",
     "alt": "Mascotas"
+  },
+  {
+    "nombre": "Calefonazo",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat2013/Calefont-y-Termos?sid=SO_HO_HOM_393225?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-calefonazo-v1.png",
+    "alt": "Ir Calefont-y-Termos"
   }
 ]
