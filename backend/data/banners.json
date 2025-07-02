@@ -508,5 +508,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat2013/Calefont-y-Termos?sid=SO_HO__366231?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-calefonazo-v1.png",
     "alt": "Ir Calefont y Termos"
+  },
+  {
+    "nombre": "BANNER DESPACHO GRATIS EN PISOS Y ADHESIVOS HOGAR",
+    "href": "https://www.sodimac.cl/static/bases/envio-sin-costo-en-pisos-adhesivos-modulos-tienda.pdf",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-calefonazo-v1.png",
+    "alt": "Ir a Bases ennvios sin costos"
   }
 ]
