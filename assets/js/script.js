@@ -12,6 +12,7 @@ document.getElementById("btnToggleRecientes").addEventListener("click", () => {
   dropdown.classList.toggle("d-none");
 });
 
+
 // Evento para cada opción del menú
 document.querySelectorAll(".dropdown-option").forEach(item => {
   item.addEventListener("click", () => {
@@ -21,14 +22,16 @@ document.querySelectorAll(".dropdown-option").forEach(item => {
     item.classList.add("active");
 
     switch (orden) {
-      case "mas-usados":
-        bannersRecientes.sort((a, b) => (b.clicks || 0) - (a.clicks || 0));
-        renderizarRecientes();
-        break;
       case "agregado":
         bannersRecientes.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
         renderizarRecientes();
         break;
+      
+      case "mas-usados":
+        bannersRecientes.sort((a, b) => (b.clicks || 0) - (a.clicks || 0));
+        renderizarRecientes();
+        break;
+
       case "alfabetico":
         bannersRecientes.sort((a, b) => (a.nombre || "").localeCompare(b.nombre || ""));
         renderizarRecientes();
@@ -38,7 +41,6 @@ document.querySelectorAll(".dropdown-option").forEach(item => {
     document.getElementById("dropdownRecientes").classList.add("d-none");
   });
 });
-
 
 
 
@@ -87,11 +89,23 @@ window.addEventListener("DOMContentLoaded", async () => {
   // ✅ 1. Cargar recientes al instante, sin esperar JSON
   const dataRecientes = localStorage.getItem("bannersRecientes");
   bannersRecientes = dataRecientes ? JSON.parse(dataRecientes) : [];
+
+// ✅ Si algún banner no tiene timestamp, asígnaselo ahora
+bannersRecientes = bannersRecientes.map(b => ({
+  ...b,
+  timestamp: b.timestamp || Date.now(),
+  clicks: b.clicks || 0
+}));
+
   renderizarRecientes(); // 🕘 Mostrar de inmediato
+
+
 
   // ✅ 2. Luego carga banners principales
   bannersJSON = await cargarBannersJson("banners.json");
   cyberBannersJSON = await cargarBannersJson("cyber-banner.json");
+
+  
 
   renderizarBanners(bannersJSON, '#listaBanners');
   renderizarBanners(cyberBannersJSON, '#listaCyberBanners');
@@ -1068,22 +1082,21 @@ clearBtn.addEventListener("click", () => {
 
 
 
-
 function agregarARecientes(banner) {
-  // Si ya existe, conservar el contador
-  const existente = bannersRecientes.find(b => b.nombre === banner.nombre);
-  const clicksPrevios = existente?.clicks || 0;
+  const now = Date.now();
 
+  // Elimina si ya existe
   bannersRecientes = bannersRecientes.filter(b => b.nombre !== banner.nombre);
 
+  // Agrega el timestamp
   bannersRecientes.unshift({
     ...banner,
-    clicks: clicksPrevios
+    timestamp: now,
+    clicks: (banner.clicks || 0)
   });
 
   localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
   renderizarRecientes();
 }
-
 
 
