@@ -164,7 +164,7 @@
   {
     "nombre": "BANNER CANAL YT",
     "href": "https://www.youtube.com/user/SodimacConstructor",
-    "img_src": "https://www.sodimac.cl/static/envioweb/2024/banner/images/banner-canal-yt-v3.png",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-canal-yt-v4.png",
     "alt": "Ir a Suscribase a nuestro canal youtube"
   },
   {
@@ -514,5 +514,11 @@
     "href": "https://www.sodimac.cl/static/bases/envio-sin-costo-en-pisos-adhesivos-modulos-tienda.pdf",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-despacho-gratis-v4.png",
     "alt": "Ir a Bases ennvios sin costos"
+  },
+  {
+    "nombre": "BANNER - 6 CUOTAS SIN INTERES EN CALEFACCIÓN",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/preparate-para-el-invierno?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-6-cuotas.png",
+    "alt": "Hasta 6 cuotas sin interes"
   }
 ]
