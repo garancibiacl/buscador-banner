@@ -6,6 +6,41 @@ document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
 });
 
 
+// Mostrar/ocultar dropdown al hacer clic en el botón
+document.getElementById("btnToggleRecientes").addEventListener("click", () => {
+  const dropdown = document.getElementById("dropdownRecientes");
+  dropdown.classList.toggle("d-none");
+});
+
+// Evento para cada opción del menú
+document.querySelectorAll(".dropdown-option").forEach(item => {
+  item.addEventListener("click", () => {
+    const orden = item.dataset.order;
+
+    document.querySelectorAll(".dropdown-option").forEach(opt => opt.classList.remove("active"));
+    item.classList.add("active");
+
+    switch (orden) {
+      case "mas-usados":
+        bannersRecientes.sort((a, b) => (b.clicks || 0) - (a.clicks || 0));
+        renderizarRecientes();
+        break;
+      case "agregado":
+        bannersRecientes.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        renderizarRecientes();
+        break;
+      case "alfabetico":
+        bannersRecientes.sort((a, b) => (a.nombre || "").localeCompare(b.nombre || ""));
+        renderizarRecientes();
+        break;
+    }
+
+    document.getElementById("dropdownRecientes").classList.add("d-none");
+  });
+});
+
+
+
 
 let cantidadMaxima = 1;
 let bannersSeleccionados = [];
@@ -907,11 +942,15 @@ function renderizarRecientes() {
     wrapper.className = "banner-item d-flex align-items-center gap-3 px-3 py-2";
     wrapper.style.cursor = "pointer";
     wrapper.onclick = () => {
-      generarBannerDesdeJson(b);
-      actualizarVistaBanner(b);
-      renderizarRecientes();
-      mostrarToast(`✅ "${b.nombre}" agregado desde recientes`, "success");
-      window.bannerEnVista = b.nombre;
+       // Incrementar clics
+  b.clicks = (b.clicks || 0) + 1;
+  localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
+
+  generarBannerDesdeJson(b);
+  actualizarVistaBanner(b);
+  renderizarRecientes();
+  mostrarToast(`✅ "${b.nombre}" agregado desde recientes`, "success");
+  window.bannerEnVista = b.nombre;
     };
 
     const img = document.createElement("img");
@@ -1018,3 +1057,33 @@ clearBtn.addEventListener("click", () => {
   searchInput.value = "";
   searchInput.focus();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+function agregarARecientes(banner) {
+  // Si ya existe, conservar el contador
+  const existente = bannersRecientes.find(b => b.nombre === banner.nombre);
+  const clicksPrevios = existente?.clicks || 0;
+
+  bannersRecientes = bannersRecientes.filter(b => b.nombre !== banner.nombre);
+
+  bannersRecientes.unshift({
+    ...banner,
+    clicks: clicksPrevios
+  });
+
+  localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
+  renderizarRecientes();
+}
+
+
+
