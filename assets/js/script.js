@@ -18,21 +18,26 @@ document.querySelectorAll(".dropdown-option").forEach(item => {
   item.addEventListener("click", () => {
     const orden = item.dataset.order;
     const cont = document.getElementById("dropdownRecientes");
+    const btn  = document.getElementById("btnToggleRecientes");
 
-    // 1) Limpiar todas las opciones
+    // Limpia estado anterior
     cont.querySelectorAll(".dropdown-option").forEach(opt => {
       opt.classList.remove("active");
       const ic = opt.querySelector("i.bx-check");
       if (ic) ic.remove();
     });
 
-    // 2) Marcar la que se clicó
+    // Marca el nuevo
     item.classList.add("active");
     const check = document.createElement("i");
     check.className = "bx bx-check bx-sm";
     item.appendChild(check);
 
-    // 3) Ejecutar tu lógica de orden
+    // **ACTUALIZA EL BOTÓN** con el texto de la opción
+    const nuevoTexto = item.textContent.trim();
+    btn.innerHTML = `<i class="bx bx-menu-select bx-sm"></i> ${nuevoTexto}`;
+
+    // Lógica de orden y render
     switch (orden) {
       case "agregado":
         bannersRecientes.sort((a,b)=> (b.timestamp||0)-(a.timestamp||0));
@@ -46,10 +51,11 @@ document.querySelectorAll(".dropdown-option").forEach(item => {
     }
     renderizarRecientes();
 
-    // 4) Cerrar menú
+    // Cierra el dropdown
     cont.classList.add("d-none");
   });
 });
+
 // FIN Evento para cada opción del menú
 
 
@@ -277,42 +283,44 @@ generarHTMLTabla();
 
 
 function eliminarBanner(index, boton) {
-  // Eliminar la fila visualmente del DOM
+  // 1. Eliminar la fila del DOM
   const fila = document.getElementById(`fila-banner-${index}`);
   if (fila) fila.remove();
 
-  // Eliminar del array
+  // 2. Quitar del array
   bannersSeleccionados.splice(index, 1);
 
-  // Si ya no quedan banners seleccionados...
+  // 3. Limpiar el cache de código y el input de búsqueda
+  const codigoTextarea = document.getElementById("codigoGenerado");
+  if (codigoTextarea) codigoTextarea.value = "";
+
+  const buscarInput = document.getElementById("buscarBanner");
+  if (buscarInput) buscarInput.value = "";
+
+  // 4. Si no quedan banners, restaurar la vista inicial
   if (bannersSeleccionados.length === 0) {
-    // Restaurar imagen de espera
     document.getElementById("previewHTML").innerHTML = `
       <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 250px;">
         <i class='bx bx-image-alt' style="font-size: 4rem; opacity: 0.3;"></i>
         <p class="mt-2 mb-0 text-white-50">Esperando selección...</p>
       </div>`;
+    
+    // Volver a renderizar todo el histórico de recientes
+    renderizarRecientes();
 
-    // Limpiar el textarea
-    document.getElementById("codigoGenerado").value = "";
-
-    // 🆕 Limpiar input de búsqueda
-    document.getElementById("buscarBanner").value = "";
-
-        // ✅ SOLO renderizamos, no borramos historial
-        renderizarRecientes(); 
-
-    // 🧹 Ocultar botón de limpiar input si existe
+    // Ocultar botón “Limpiar input” si existe
     const btnClear = document.getElementById("btnClearInput");
     if (btnClear) btnClear.classList.add("d-none");
   } else {
-    generarHTMLTabla(); // solo si hay banners restantes
+    // 5. Si aún quedan banners, regenerar sólo la tabla de HTML
+    generarHTMLTabla();
   }
 
-
+  // 6. Feedback al usuario y actualización del contador
   mostrarToast("🗑️ Banner eliminado", "danger");
   actualizarContador();
 }
+
 
 function generarHTMLDesdeSeleccionados() {
   if (bannersSeleccionados.length === 0) {
