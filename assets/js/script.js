@@ -13,7 +13,7 @@ document.getElementById("btnToggleRecientes").addEventListener("click", () => {
 });
 
 
-// Evento para cada opción del menú
+// START Evento para cada opción del menú
 document.querySelectorAll(".dropdown-option").forEach(item => {
   item.addEventListener("click", () => {
     const orden = item.dataset.order;
@@ -50,7 +50,7 @@ document.querySelectorAll(".dropdown-option").forEach(item => {
     cont.classList.add("d-none");
   });
 });
-
+// FIN Evento para cada opción del menú
 
 
 
@@ -961,7 +961,7 @@ function renderizarRecientes() {
   // titulo.textContent = "🕘 Banners recientes usados:";
   cont.appendChild(titulo);
 
-  bannersRecientes.slice(0, 20).forEach((b) => {
+  bannersRecientes.slice(0, 30).forEach((b) => {
     const wrapper = document.createElement("div");
     wrapper.className = "banner-item d-flex align-items-center gap-3 px-3 py-2";
     wrapper.style.cursor = "pointer";
