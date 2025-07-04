@@ -623,6 +623,7 @@ position: relative !important;
   color: white;
   font-size: 1rem;
   padding: 6px;
+  opacity: 0.8;
   transition: all 0.2s ease;
 
 }
