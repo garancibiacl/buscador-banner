@@ -397,9 +397,13 @@ color: #ddd;
 border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 cursor: pointer;
 transition: background 0.2s;
+margin: 7px;
+border-radius: 9px;
+
 }
 .banner-item:hover {
 background-color: rgba(255, 255, 255, 0.05);
+
 }
 .banner-item .nombre {
 font-weight: 500;
