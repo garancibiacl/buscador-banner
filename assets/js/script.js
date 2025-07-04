@@ -1005,7 +1005,7 @@ if (/^huincha/i.test(b.nombre)) {
 
     info.className = "flex-grow-1";
     info.innerHTML = `
-    <div class="nombre text-truncate text-light" title="${b.nombre}">${b.nombre}</div>
+    <div class="nombre fw-light text-light" title="${b.nombre}">${b.nombre}</div>
     <div class="tipo mt-1"><span class="${tipoClase}"> ${tipo}</span></div>
   `;
   
