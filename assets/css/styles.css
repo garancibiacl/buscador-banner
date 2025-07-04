@@ -578,6 +578,7 @@ position: relative !important;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 0.8rem;
 }
 
 /* opción activa: texto verde + icono visible */
