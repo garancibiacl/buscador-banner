@@ -17,30 +17,40 @@ document.getElementById("btnToggleRecientes").addEventListener("click", () => {
 document.querySelectorAll(".dropdown-option").forEach(item => {
   item.addEventListener("click", () => {
     const orden = item.dataset.order;
+    const cont = document.getElementById("dropdownRecientes");
 
-    document.querySelectorAll(".dropdown-option").forEach(opt => opt.classList.remove("active"));
+    // 1) Limpiar todas las opciones
+    cont.querySelectorAll(".dropdown-option").forEach(opt => {
+      opt.classList.remove("active");
+      const ic = opt.querySelector("i.bx-check");
+      if (ic) ic.remove();
+    });
+
+    // 2) Marcar la que se clicó
     item.classList.add("active");
+    const check = document.createElement("i");
+    check.className = "bx bx-check bx-sm";
+    item.appendChild(check);
 
+    // 3) Ejecutar tu lógica de orden
     switch (orden) {
       case "agregado":
-        bannersRecientes.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-        renderizarRecientes();
+        bannersRecientes.sort((a,b)=> (b.timestamp||0)-(a.timestamp||0));
         break;
-      
       case "mas-usados":
-        bannersRecientes.sort((a, b) => (b.clicks || 0) - (a.clicks || 0));
-        renderizarRecientes();
+        bannersRecientes.sort((a,b)=> (b.clicks||0)-(a.clicks||0));
         break;
-
       case "alfabetico":
-        bannersRecientes.sort((a, b) => (a.nombre || "").localeCompare(b.nombre || ""));
-        renderizarRecientes();
+        bannersRecientes.sort((a,b)=> (a.nombre||"").localeCompare(b.nombre||""));
         break;
     }
+    renderizarRecientes();
 
-    document.getElementById("dropdownRecientes").classList.add("d-none");
+    // 4) Cerrar menú
+    cont.classList.add("d-none");
   });
 });
+
 
 
 
