@@ -520,5 +520,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/preparate-para-el-invierno?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-6-cuotas.png",
     "alt": "Hasta 6 cuotas sin interes"
+  },
+    {
+    "nombre": "TU CASA SIEMPRE GANA (JULIO)",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tucasasiempregana?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-tu-casa-v1.png",
+    "alt": "Tu casa siempre gana"
   }
 ]
