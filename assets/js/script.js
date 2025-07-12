@@ -19,8 +19,9 @@ document.querySelectorAll(".dropdown-option").forEach(item => {
     const orden = item.dataset.order;
     const cont = document.getElementById("dropdownRecientes");
     const btn  = document.getElementById("btnToggleRecientes");
+    const labelFiltro = btn.querySelector(".filter-label");
 
-    // Limpia estado anterior
+    // Limpia el estado anterior
     cont.querySelectorAll(".dropdown-option").forEach(opt => {
       opt.classList.remove("active");
       const ic = opt.querySelector("i.bx-check");
@@ -33,28 +34,36 @@ document.querySelectorAll(".dropdown-option").forEach(item => {
     check.className = "bx bx-check bx-sm";
     item.appendChild(check);
 
-    // **ACTUALIZA EL BOTÓN** con el texto de la opción
+    // Actualiza SOLO el texto dentro de .filter-label
     const nuevoTexto = item.textContent.trim();
-    btn.innerHTML = `<i class="bx bx-menu-select bx-sm"></i> ${nuevoTexto}`;
+    if (labelFiltro) labelFiltro.textContent = nuevoTexto;
 
-    // Lógica de orden y render
+    // Aplica truncado dinámico si el buscador está expandido
+    const buscador = document.querySelector(".search-container");
+    if (buscador && labelFiltro) {
+      labelFiltro.style.maxWidth = buscador.classList.contains("expandido") ? "80px" : "150px";
+    }
+
+    // Ordena según opción seleccionada
     switch (orden) {
       case "agregado":
-        bannersRecientes.sort((a,b)=> (b.timestamp||0)-(a.timestamp||0));
+        bannersRecientes.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
         break;
       case "mas-usados":
-        bannersRecientes.sort((a,b)=> (b.clicks||0)-(a.clicks||0));
+        bannersRecientes.sort((a,b)=>(b.clicks||0)-(a.clicks||0));
         break;
       case "alfabetico":
-        bannersRecientes.sort((a,b)=> (a.nombre||"").localeCompare(b.nombre||""));
+        bannersRecientes.sort((a,b)=>(a.nombre||"").localeCompare(b.nombre||""));
         break;
     }
+
     renderizarRecientes();
 
-    // Cierra el dropdown
+    // Cierra dropdown
     cont.classList.add("d-none");
   });
 });
+
 
 // FIN Evento para cada opción del menú
 
@@ -132,10 +141,65 @@ bannersRecientes = bannersRecientes.map(b => ({
 });
 
 
+// START FUNCION ICONO BUSCAR LISTA DE BANNERS
+
+document.querySelectorAll(".buscador-recientes").forEach(buscador => {
+  const iconoBuscar = buscador.querySelector(".search-icon");
+  const inputBuscar = buscador.querySelector(".search-input");
+  const btnClearInput = buscador.querySelector(".btn-clear-input");
+  const labelFiltro = document.querySelector(".filter-label");
+
+  iconoBuscar.addEventListener("click", () => {
+    buscador.classList.toggle("expandido");
+  
+    // ✅ AJUSTE MÁGICO: cambia el maxWidth según estado
+    if (labelFiltro) {
+      labelFiltro.style.maxWidth = buscador.classList.contains("expandido")
+        ? "80px"
+        : "170px";
+    }
+  
+    if (buscador.classList.contains("expandido")) {
+      setTimeout(() => inputBuscar.focus(), 150);
+    } else {
+      inputBuscar.value = "";
+      renderizarRecientes(bannersRecientes);
+      btnClearInput.style.display = "none";
+    }
+  });
+
+ 
+  
+
+  inputBuscar.addEventListener("input", () => {
+    const texto = inputBuscar.value.toLowerCase();
+    const filtrados = bannersRecientes.filter(b =>
+      b.nombre.toLowerCase().includes(texto)
+    );
+    renderizarRecientes(filtrados);
+    btnClearInput.style.display = texto ? "block" : "none";
+  });
+
+  btnClearInput.addEventListener("click", () => {
+    inputBuscar.value = "";
+    renderizarRecientes(bannersRecientes);
+    inputBuscar.focus();
+    btnClearInput.style.display = "none";
+  });
+});
 
 
 
+document.querySelectorAll(".dropdown-option").forEach(item => {
+  item.addEventListener("click", () => {
+    const texto = item.textContent;
+    document.querySelector(".filter-label").textContent = texto;
+  });
+});
 
+
+
+// FIN FUNCION ICONO BUSCAR LISTA DE BANNERS
 
 
 
@@ -953,36 +1017,34 @@ function agregarARecientes(banner) {
 
 // Renderiza los banners recientes en el contenedor #listaRecientes 
 
-function renderizarRecientes() {
+function renderizarRecientes(lista = bannersRecientes) {
   const cont = document.getElementById("listaRecientes");
   if (!cont) return;
 
   cont.innerHTML = "";
 
-  if (!Array.isArray(bannersRecientes) || bannersRecientes.length === 0) {
-    cont.innerHTML = `<div class="text-secondary px-3 py-2">No hay banners recientes aún.</div>`;
+  if (!Array.isArray(lista) || lista.length === 0) {
+    cont.innerHTML = `<div class="text-secondary px-3 py-2">No hay banners recientes.</div>`;
     return;
   }
 
   const titulo = document.createElement("div");
   titulo.className = "px-2 fw-semibold text-white-50 mb-2";
-  // titulo.textContent = "🕘 Banners recientes usados:";
   cont.appendChild(titulo);
 
-  bannersRecientes.slice(0, 30).forEach((b) => {
+  lista.slice(0, 30).forEach((b) => {
     const wrapper = document.createElement("div");
     wrapper.className = "banner-item d-flex align-items-center gap-3 px-3 py-2";
     wrapper.style.cursor = "pointer";
     wrapper.onclick = () => {
-       // Incrementar clics
-  b.clicks = (b.clicks || 0) + 1;
-  localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
+      b.clicks = (b.clicks || 0) + 1;
+      localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
 
-  generarBannerDesdeJson(b);
-  actualizarVistaBanner(b);
-  renderizarRecientes();
-  mostrarToast(`✅ "${b.nombre}" agregado desde recientes`, "success");
-  window.bannerEnVista = b.nombre;
+      generarBannerDesdeJson(b);
+      actualizarVistaBanner(b);
+      renderizarRecientes(); // siempre renderiza con el estado actualizado
+      mostrarToast(`✅ "${b.nombre}" agregado desde recientes`, "success");
+      window.bannerEnVista = b.nombre;
     };
 
     const img = document.createElement("img");
@@ -994,47 +1056,40 @@ function renderizarRecientes() {
     img.style.borderRadius = "4px";
 
     const info = document.createElement("div");
-// Detectar tipo según el nombre
-let tipo = "Banner";
-let tipoClase = "badge badge-green";
+    let tipo = "Banner";
+    let tipoClase = "badge badge-green";
 
-if (/^huincha/i.test(b.nombre)) {
-  tipo = "Huincha";
-  tipoClase = "badge badge-orange";
-}
+    if (/^huincha/i.test(b.nombre)) {
+      tipo = "Huincha";
+      tipoClase = "badge badge-orange";
+    }
 
     info.className = "flex-grow-1";
     info.innerHTML = `
-    <div class="nombre fw-light text-light" title="${b.nombre}">${b.nombre}</div>
-    <div class="tipo mt-1"><span class="${tipoClase}"> ${tipo}</span></div>
-  `;
-  
+      <div class="nombre fw-light text-light" title="${b.nombre}">${b.nombre}</div>
+      <div class="tipo mt-1"><span class="${tipoClase}"> ${tipo}</span></div>
+    `;
 
     const closeBtn = document.createElement("button");
     closeBtn.className = "tooltip-btn";
-    closeBtn.style.background = "transparent"; // ❌ Elimina fondo gris
-closeBtn.style.boxShadow = "none";         // ❌ Elimina sombra por si acaso
-closeBtn.style.border = "none";            // ❌ Asegura que no tenga bordes
-closeBtn.style.opacity = "0.7";  
-closeBtn.style.fontSize = "1.3rem";  
-closeBtn.style.zIndex = 9999; 
+    closeBtn.style.background = "transparent";
+    closeBtn.style.boxShadow = "none";
+    closeBtn.style.border = "none";
+    closeBtn.style.opacity = "0.7";
+    closeBtn.style.fontSize = "1.3rem";
+    closeBtn.style.zIndex = 9999;
+    closeBtn.innerHTML = "&times;";
 
-// Agregar el tooltip como un span hijo
-const tooltip = document.createElement("span");
-tooltip.className = "tooltip-close tooltip-text";
-tooltip.textContent = "Eliminar";
-
-// Asegúrate de que el botón tenga algo visual si la clase no lo muestra
-closeBtn.innerHTML = "&times;"; // Alternativa visual si la clase falla
-
-// Añadir tooltip al botón
-closeBtn.appendChild(tooltip);
+    const tooltip = document.createElement("span");
+    tooltip.className = "tooltip-close tooltip-text";
+    tooltip.textContent = "Eliminar";
+    closeBtn.appendChild(tooltip);
 
     closeBtn.onclick = (e) => {
       e.stopPropagation();
       bannersRecientes = bannersRecientes.filter(r => r.nombre !== b.nombre);
       localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
-      renderizarRecientes();
+      renderizarRecientes(); // actualiza lista sin el eliminado
 
       if (window.bannerEnVista === b.nombre) {
         const preview = document.getElementById("previewHTML");
@@ -1052,10 +1107,8 @@ closeBtn.appendChild(tooltip);
         }
         if (codigo) codigo.value = "";
         if (inputBuscar) inputBuscar.value = "";
-
         window.bannerEnVista = null;
       }
-      
     };
 
     wrapper.appendChild(img);
@@ -1064,6 +1117,7 @@ closeBtn.appendChild(tooltip);
     cont.appendChild(wrapper);
   });
 }
+
 // FinInicializar lista de banners recientes
 
 // Cargar recientes desde localStorage cuando arranca
@@ -1116,5 +1170,6 @@ function agregarARecientes(banner) {
   localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
   renderizarRecientes();
 }
+
 
 

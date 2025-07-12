@@ -112,9 +112,9 @@
     
     
   <br>
-    <div class="d-flex gap-2 ">
+    <div class="d-flex gap-2 justify-content-center container-fluid ">
 
-<div class="d-flex justify-content-center">
+<div class="d-flex">
   <div class="col-8 ">
     <div class="position-relative mb-4">
              <!-- <div class="input-group flex-nowrap">
@@ -152,22 +152,50 @@
 
 <div class="col-3 glass-card rounded-3">
 
-  <section class="card-body p-3">
+  <section class="card-body p-2">
    
  <!-- Botón de menú + dropdown -->
+ <div class="container-fluid">
+  <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+    <!-- 🟢 IZQUIERDA: Dropdown Recientes -->
+<!-- Botón que muestra el texto seleccionado -->
 <div class="dropdown-recientes position-relative">
-  <button id="btnToggleRecientes" class="btn-filter opacity-75 d-flex align-items-center gap-2">
-    <i class="bx bx-menu-select bx-sm"></i>
-    Recientes
+  <button id="btnToggleRecientes" class="btn-filter d-flex align-items-center gap-2">
+    <i class="bx bx-menu-select bx-sm"></i><span class="filter-label">Agregados recientemente</span>
+    
   </button>
 
+  <!-- Opciones del dropdown -->
   <div id="dropdownRecientes" class="dropdown-content d-none">
     <div class="dropdown-option fw-light d-flex justify-content-between" data-order="agregado">Agregado recientemente</div>
     <div class="dropdown-option fw-light d-flex justify-content-between" data-order="mas-usados">Más usados</div>
     <div class="dropdown-option fw-light d-flex justify-content-between" data-order="alfabetico">Alfabéticamente</div>
   </div>
-  
 </div>
+
+
+    <!-- 🔵 DERECHA: Buscador -->
+    <div class="search-container buscador-recientes position-relative ms-auto">
+      <i class="bx bx-search search-icon"></i>
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Buscar en tu biblioteca..."
+      />
+      <button type="button" class="btn-clear-input" title="Limpiar búsqueda">
+        &times;
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
 
     
   
@@ -227,7 +255,9 @@
 
 
 
-  </div>
+  
+
+</div>
 
 
 

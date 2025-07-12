@@ -610,7 +610,7 @@ position: relative !important;
   border: none;
   cursor: pointer;
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
   padding: 6px;
   opacity: 0.8;
   transition: all 0.2s ease;
@@ -621,7 +621,6 @@ position: relative !important;
   border: none;
   cursor: pointer;
   color: white;
-  font-size: 1rem;
   padding: 6px;
   opacity: 0.8;
   transition: all 0.2s ease;
@@ -634,3 +633,85 @@ position: relative !important;
 
 }
 
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: #1e1e1e;
+  border-radius: 20px;
+  padding: 6px 12px;
+  width: 42px;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  cursor: text;
+}
+
+.search-container.expandido {
+  width: 100%;
+  max-width: 250px;
+}
+
+.search-icon {
+  font-size: 20px;
+  color: #ccc;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #fff;
+  margin-left: 10px;
+  outline: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.search-container.expandido .search-input {
+  opacity: 1;
+}
+
+.btn-clear-input {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;
+}
+.search-container.expandido .btn-clear-input {
+  display: block;
+}
+
+
+
+.btn-clear-input {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: none;
+}
+.buscador-recientes.expandido .btn-clear-input {
+  display: block;
+}
+
+
+.filter-label {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+  transition: max-width 0.3s ease;
+}
+
+/* Cuando el buscador se expande, reducimos el ancho del texto */
+.search-container.expandido ~ .dropdown-recientes .filter-label,
+.buscador-recientes.expandido ~ .dropdown-recientes .filter-label {
+  max-width: 80px;
+}
