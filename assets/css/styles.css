@@ -636,7 +636,7 @@ position: relative !important;
 .search-container {
   display: flex;
   align-items: center;
-  background-color: #1e1e1e;
+  background-color: #2a2a2a;
   border-radius: 20px;
   padding: 6px 12px;
   width: 42px;
@@ -649,6 +649,8 @@ position: relative !important;
   width: 100%;
   max-width: 250px;
 }
+
+background-color: #2a2a2a;
 
 .search-icon {
   font-size: 20px;
