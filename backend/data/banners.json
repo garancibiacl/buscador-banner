@@ -521,10 +521,16 @@
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-6-cuotas.png",
     "alt": "Hasta 6 cuotas sin interes"
   },
-    {
+  {
     "nombre": "TU CASA SIEMPRE GANA (JULIO)",
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tucasasiempregana?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-tu-casa-v1.png",
     "alt": "Tu casa siempre gana"
+  },
+  {
+    "nombre": "HUINCHA Envio gratis Julio 2025",
+    "href": "",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/07-julio/14-midea/images/huincha-envio-gratis.png",
+    "alt": "Ir a Envio gratis"
   }
 ]
