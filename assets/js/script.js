@@ -432,7 +432,7 @@ function generarHTMLDesdeSeleccionados() {
       </div>
     `;
 
-    return `<div id="fila-banner-${index}" class="col-md-11 mb-4">${tabla}${pieBanner}</div>`;
+    return `<div id="fila-banner-${index}" class="mb-4">${tabla}${pieBanner}</div>`;
   }).join("\n");
 }
 
