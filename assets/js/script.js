@@ -412,7 +412,7 @@ function generarHTMLDesdeSeleccionados() {
     `;
 
     const pieBanner = `
-      <div class="d-flex justify-content-between align-items-center mt-2 flex-wrap">
+      <div class="col-md-12 d-flex justify-content-between align-items-center mt-2 flex-wrap">
         <div class="nombre-banner-inferior text-truncate">${b.nombre || '📛 Sin nombre'}</div>
         <div class="d-flex gap-2 mt-2 mt-sm-0">
           <button class="tooltip-btn btn btn-dark btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
@@ -432,7 +432,7 @@ function generarHTMLDesdeSeleccionados() {
       </div>
     `;
 
-    return `<div id="fila-banner-${index}" class="mb-4">${tabla}${pieBanner}</div>`;
+    return `<div id="fila-banner-${index}" class="col-md-11 mb-4">${tabla}${pieBanner}</div>`;
   }).join("\n");
 }
 
