@@ -432,7 +432,16 @@ function generarHTMLDesdeSeleccionados() {
       </div>
     `;
 
-    return `<div id="fila-banner-${index}" class="mb-4">${tabla}${pieBanner}</div>`;
+    return `<div class="container-fluid">
+  <div class="row">
+    <!-- Aquí van tus banners -->
+    <div id="fila-banner-${index}" class="col-12 mb-4">
+      ${tabla}
+      ${pieBanner}
+    </div>
+  </div>
+</div>
+`;
   }).join("\n");
 }
 
