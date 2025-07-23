@@ -400,15 +400,17 @@ function generarHTMLDesdeSeleccionados() {
 
   return bannersSeleccionados.map((b, index) => {
     const tabla = `
+     <div class="row">
       <table width="600" cellspacing="0" cellpadding="0" align="center">
         <tr>
           <td colspan="2" align="center">
             <a href="${b.href}" target="_blank">
-              <img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">
+              <img src="${b.img_src}" alt="${b.alt}" style="display:block; width: 100%;" border="0">
             </a>
           </td>
         </tr>
       </table>
+      </div>
     `;
 
     const pieBanner = `
@@ -436,8 +438,10 @@ function generarHTMLDesdeSeleccionados() {
   <div class="row">
     <!-- Aquí van tus banners -->
     <div id="fila-banner-${index}" class="col-12 mb-4">
+    <div class="img-fluid w-100">
       ${tabla}
       ${pieBanner}
+          </div>
     </div>
   </div>
 </div>
