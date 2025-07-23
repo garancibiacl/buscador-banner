@@ -532,5 +532,17 @@
     "href": "",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-envio-gratis-seleccionado.png",
     "alt": "Ir a Envio gratis"
+  },
+  {
+    "nombre": "HUINCHA  3 Y 6 csi en productos seleccionado - Hogar",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-3y6-hogar-v2.png",
+    "alt": "Hasta 3 y 6 cuotas sin interes"
+  },
+  {
+    "nombre": "HUINCHA  3 Y 6 csi en productos seleccionado - PRO",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-3y6-profesional-v2.png",
+    "alt": "Hasta 3 y 6 cuotas sin interes"
   }
 ]
