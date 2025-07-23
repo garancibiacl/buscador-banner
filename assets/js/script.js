@@ -497,9 +497,9 @@ function generarHTMLTabla() {
 const tablaHTML = bannersSeleccionados.map(b => {
   const esHuincha = !b.href?.trim();
   const contenido = esHuincha
-    ? `<img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">`
+    ? `<img src="${b.img_src}" alt="${b.alt}" style="display:block; width: 100%;" border="0">`
     : `<a href="${b.href}" target="_blank">
-         <img src="${b.img_src}" alt="${b.alt}" style="display:block;" border="0">
+         <img src="${b.img_src}" alt="${b.alt}" style="display:block; width: 100%;" border="0">
        </a>`;
   return `
   <tr>
