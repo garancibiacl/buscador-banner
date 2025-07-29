@@ -636,7 +636,7 @@ position: relative !important;
 .search-container {
   display: flex;
   align-items: center;
-  background-color: #2a2a2a;
+  /* background-color: #2a2a2a; */
   border-radius: 20px;
   padding: 6px 12px;
   width: 42px;
@@ -647,10 +647,12 @@ position: relative !important;
 
 .search-container.expandido {
   width: 100%;
-  max-width: 250px;
+  /* max-width: 250px; */
+  background-color: #2a2a2a;
+
 }
 
-background-color: #2a2a2a;
+
 
 .search-icon {
   font-size: 20px;
@@ -715,5 +717,5 @@ background-color: #2a2a2a;
 /* Cuando el buscador se expande, reducimos el ancho del texto */
 .search-container.expandido ~ .dropdown-recientes .filter-label,
 .buscador-recientes.expandido ~ .dropdown-recientes .filter-label {
-  max-width: 80px;
+  max-width: 105px;
 }
