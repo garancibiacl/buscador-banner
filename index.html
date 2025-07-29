@@ -199,7 +199,15 @@
 
   <div class="col-12 col-md-3 glass-card p-3 rounded-3">
     <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start pb-4">
     <h6 class="card-title d-flex gap-2 fw-normal align-items-center mb-3 opacity-75"><i class="bx bx-clipboard-code bx-sm"></i> Código HTML</h6>
+     <!-- Botón Limpiar -->
+     <button onclick="limpiarCamposBanner()"
+     class="icon-btn tooltip-btn pt-0">
+<i class="bx bx-trash-alt bx-xs"></i> 
+<span class="tooltip-text tooltip-json">Eliminar código HTML</span>
+</button>
+</div>
     <textarea id="codigoGenerado" class="preview-scroll form-control" rows="8" readonly></textarea>
     <div class="col-12 d-flex justify-content-end gap-2 mt-3 flex-wrap">
 
@@ -209,11 +217,7 @@
         <i class="bx bx-copy bx-xs"></i> Copiar Html
       </button>
     
-      <!-- Botón Limpiar -->
-      <button onclick="limpiarCamposBanner()"
-              class="btn btn-dark d-flex align-items-center gap-2 rounded-pill tooltip-btn">
-        <i class="bx bx-brush bx-xs"></i> Limpiar Todo
-      </button>
+     
     
     </div>
     

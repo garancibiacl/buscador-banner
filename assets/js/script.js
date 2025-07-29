@@ -581,9 +581,9 @@ function limpiarCamposBanner() {
   if (barra) barra.style.width = "0%";
 
   // 🧽 Limpiar recientes
-  bannersRecientes = [];
+  /*bannersRecientes = [];
   localStorage.removeItem("bannersRecientes");
-  renderizarRecientes(); // ← actualiza la vista inmediatamente
+  renderizarRecientes(); // ← actualiza la vista inmediatamente*/
 
   // ✅ Toast opcional
   mostrarToast("🧼 Todos los campos y recientes fueron limpiados", "info");
