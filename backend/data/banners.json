@@ -544,5 +544,18 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-3y6-profesional-v2.png",
     "alt": "Hasta 3 y 6 cuotas sin interes"
+  },
+  {
+    "nombre": "HUINCHA black OUT- con linea blanca",
+    "href": "",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-BO.png",
+    "alt": "Black Out del 30 de julio al 04 de Agosto"
+  },
+  {
+    "nombre": "HUINCHA black OUT- Sin linea blanca",
+    "href": "",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-BO-sin-linea.png",
+    "alt": "Black Out del 30 de julio al 04 de Agosto"
   }
+  
 ]
