@@ -13,6 +13,47 @@ document.getElementById("btnToggleRecientes").addEventListener("click", () => {
 });
 
 
+
+document.addEventListener("click", ({ target }) => {
+  const btn = target.closest(".copiar-tr");
+  if (!btn) return;
+
+  const fila = document.getElementById(`fila-banner-${btn.dataset.index}`);
+  const tabla = fila?.querySelector("tr");
+  if (!tabla) return;
+
+  const textarea = Object.assign(document.createElement("textarea"), {
+    value: tabla.outerHTML,
+  });
+  document.body.append(textarea);
+  textarea.select();
+
+  const icono = btn.querySelector(".icono-copiar");
+  const texto = btn.querySelector(".texto-copiar");
+
+  const feedback = (success = true) => {
+    if (icono && texto) {
+      icono.className = `bx ${success ? "bx-check" : "bx-copy"} bx-xs icono-copiar`;
+      texto.textContent = success ? "Copiado" : "Copiar";
+      if (success) setTimeout(() => {
+        icono.className = "bx bx-copy bx-xs icono-copiar";
+        texto.textContent = "Copiar";
+      }, 2000);
+    }
+    const toast = typeof mostrarToast === "function" ? mostrarToast : alert;
+    toast(success ? "📋 TR copiado correctamente" : "❌ Error al copiar el banner", success ? "success" : "danger");
+  };
+
+  try {
+    document.execCommand("copy");
+    feedback(true);
+  } catch {
+    feedback(false);
+  }
+
+  textarea.remove();
+});
+
 // START Evento para cada opción del menú
 document.querySelectorAll(".dropdown-option").forEach(item => {
   item.addEventListener("click", () => {
@@ -170,15 +211,15 @@ document.querySelectorAll(".buscador-recientes").forEach(buscador => {
 
  
   
-
   inputBuscar.addEventListener("input", () => {
-    const texto = inputBuscar.value.toLowerCase();
+    const texto = normalizarTexto(inputBuscar.value);
     const filtrados = bannersRecientes.filter(b =>
-      b.nombre.toLowerCase().includes(texto)
+      normalizarTexto(b.nombre).includes(texto)
     );
     renderizarRecientes(filtrados);
     btnClearInput.style.display = texto ? "block" : "none";
   });
+  
 
   btnClearInput.addEventListener("click", () => {
     inputBuscar.value = "";
@@ -231,9 +272,11 @@ if (!valor.trim()) {
 }
 
 // Filtrar banners que coincidan
+const textoNormalizado = normalizarTexto(valor);
 const filtrados = bannersJSON.filter(b =>
-  b.nombre.toLowerCase().includes(valor.toLowerCase())
+  normalizarTexto(b.nombre).includes(textoNormalizado)
 );
+
 
 // Si no hay sugerencias, cerramos
 if (filtrados.length === 0) {
@@ -296,6 +339,8 @@ if (!contenedor.querySelector("table")) {
   contenedor.innerHTML = '<table width="600" cellspacing="0" cellpadding="0" align="center" id="tablaPreview"></table>';
 }
 
+
+
 const index = bannersSeleccionados.length - 1;
 const esHuincha = !banner.href?.trim();
 
@@ -305,32 +350,40 @@ const contenido = esHuincha
        <img src="${banner.img_src}" alt="${banner.alt}" style="display:block;" border="0">
      </a>`;
 
-const botonEditar = `
-  <div class="mt-2 d-flex justify-content-end gap-2">
+  
+   
 
-    <button class="tooltip-btn btn btn-dark btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
-            onclick="abrirModalEditar(${index})"
-            style="font-size: 0.85rem;">
-      <i class="bx bx-edit-alt bx-xs"></i> Editar
-      <span class="tooltip-text">Editar banner</span>
-    </button>
-
-    <button class="tooltip-btn btn btn-danger btn-sm mb-2 d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
-            onclick="eliminarBanner(${index}, this)"
-            style="font-size: 0.85rem;">
-      <i class="bx bx-trash bx-xs"></i> Eliminar
-      <span class="tooltip-text">Eliminar banner</span>
-    </button>
-
-  </div>`;
-
-const filaPreview = `
-<tr id="fila-banner-${index}">
-<td colspan="2" align="center">
-  ${contenido}
-  ${botonEditar}
-</td>
-</tr>`;
+     const filaPreview = `
+     <tr id="fila-banner-${index}">
+       <td colspan="2" align="center">
+         ${contenido}
+     
+         <div class="d-flex justify-content-center gap-2 mt-2">
+           <button class="tooltip-btn btn btn-dark btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+                   onclick="abrirModalEditar(${index})"
+                   style="font-size: 0.85rem;">
+             <i class="bx bx-edit-alt bx-xs"></i> Editar
+             <span class="tooltip-text">Editar banner</span>
+           </button>
+     
+           <button class="tooltip-btn btn btn-danger btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+                   onclick="eliminarBanner(${index}, this)"
+                   style="font-size: 0.85rem;">
+             <i class="bx bx-trash bx-xs"></i> Eliminar
+             <span class="tooltip-text">Eliminar banner</span>
+           </button>
+     
+           <button class="tooltip-btn btn btn-secondary btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1 copiar-tr"
+                   data-index="${index}"
+                   style="font-size: 0.85rem;">
+             <i class='bx bx-copy bx-xs icono-copiar'></i>
+             <span class="texto-copiar">Copiar</span>
+             <span class="tooltip-text">Copiar tr </span>
+           </button>
+         </div>
+       </td>
+     </tr>`;
+     
 
 contenedor.querySelector("table").insertAdjacentHTML("beforeend", filaPreview);
 
@@ -414,25 +467,31 @@ function generarHTMLDesdeSeleccionados() {
     `;
 
     const pieBanner = `
-      <div class="col-md-12 d-flex justify-content-between align-items-center mt-2 flex-wrap">
-        <div class="nombre-banner-inferior text-truncate">${b.nombre || '📛 Sin nombre'}</div>
-        <div class="d-flex gap-2 mt-2 mt-sm-0">
-          <button class="tooltip-btn btn btn-dark btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
-                  onclick="abrirModalEditar(${index})"
-                  style="font-size: 0.85rem;">
-            <i class="bx bx-edit-alt bx-xs"></i> Editar
-            <span class="tooltip-text">Editar banner</span>
-          </button>
-
-          <button class="tooltip-btn btn btn-danger btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
-                  onclick="eliminarBanner(${index}, this)"
-                  style="font-size: 0.85rem;">
-            <i class="bx bx-trash bx-xs"></i> Eliminar
-            <span class="tooltip-text">Eliminar banner</span>
-          </button>
-        </div>
+    <div class="col-md-12 d-flex justify-content-between align-items-center mt-2 flex-wrap">
+      <div class="nombre-banner-inferior text-truncate">${b.nombre || '📛 Sin nombre'}</div>
+      <div class="d-flex gap-2 mt-2 mt-sm-0">
+        <button class="tooltip-btn btn btn-dark btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+                onclick="abrirModalEditar(${index})"
+                style="font-size: 0.85rem;">
+          <i class="bx bx-edit-alt bx-xs"></i> Editar
+          <span class="tooltip-text">Editar banner</span>
+        </button>
+        <button class="tooltip-btn btn btn-danger btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1"
+                onclick="eliminarBanner(${index}, this)"
+                style="font-size: 0.85rem;">
+          <i class="bx bx-trash bx-xs"></i> Eliminar
+          <span class="tooltip-text">Eliminar banner</span>
+        </button>
+        <button class="tooltip-btn btn btn-secondary btn-sm d-flex align-items-center gap-2 shadow-none border-0 px-2 py-1 copiar-tr"
+                data-index="${index}"
+                style="font-size: 0.85rem;">
+          <i class="bx bx-copy bx-xs icono-copiar"></i> <span class="texto-copiar">Copiar</span>
+          <span class="tooltip-text">Copiar tr del banner o huincha</span>
+        </button>
       </div>
-    `;
+    </div>
+  `;
+  
 
     return `<div class="container-fluid">
   <div class="row">
@@ -556,6 +615,14 @@ setTimeout(() => contador.classList.remove("animate__animated", "animate__bounce
 
 
 
+function normalizarTexto(texto) {
+  return texto
+    .normalize("NFD")                     // descompone letras con tildes
+    .replace(/[\u0300-\u036f]/g, "")     // elimina los diacríticos
+    .replace(/ñ/g, "n")                  // reemplaza ñ
+    .replace(/Ñ/g, "n")                  // reemplaza Ñ
+    .toLowerCase();                      // convierte todo a minúscula
+}
 
 
 
@@ -1183,6 +1250,7 @@ function agregarARecientes(banner) {
   localStorage.setItem("bannersRecientes", JSON.stringify(bannersRecientes));
   renderizarRecientes();
 }
+
 
 
 
