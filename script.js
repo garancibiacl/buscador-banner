@@ -29,23 +29,17 @@ bannersJSON = await cargarBannersJson();
 console.log("✅ bannersJSON cargado:", bannersJSON);
 });*/
 
-async function cargarBannersJson() {
-const urls = ['backend/data/banners.json', 'backend/data/cyber-banner.json']; // <- ambas fuentes
-let resultado = [];
-
-for (const url of urls) {
+// Carga un archivo JSON de banners desde la carpeta backend/data
+async function cargarBannersJson(nombreArchivo) {
+  const url = `backend/data/${nombreArchivo}`;
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error(`No se pudo cargar ${url}`);
-    const data = await response.json();
-    resultado = resultado.concat(data);
-    console.log(`✅ Cargado: ${url}`, data);
+    return await response.json();
   } catch (err) {
     console.error(`❌ Error cargando ${url}:`, err);
+    return [];
   }
-}
-
-return resultado;
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
