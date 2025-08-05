@@ -592,5 +592,11 @@
     "href": "%%=RedirectTo(concat('https://sodimac.cl/sodimac-cl/content/catalogo-especialista-constructor-2025?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/catalogo-pro-v2.png",
     "alt": "catalogo-especialista-constructor-2025"
+  },
+  {
+    "nombre": "Banner EXCLUSIVO CES - DOBLE ACUMULACIÓN DE PUNTOS",
+    "href": "https://www.sodimac.cl/static/bases/doble-acumulacion-cmr-puntos.pdf",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-doble-puntos-ces-v2.png",
+    "alt": "Acumule el doble"
   }
 ]
