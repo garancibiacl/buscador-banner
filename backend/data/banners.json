@@ -580,5 +580,17 @@
     "href": "",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/huinchas/huincha-10-neumatico.png",
     "alt": "Usando este cupon en productos de seleccionados Neumaticos"
+  },
+  {
+    "nombre": "BANNER - Concurso Taller Soñado de Bauker - PRO",
+    "href": "https://www.sodimac.cl/static/bases/bl-taller-aonpro.pdf",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-bauker-v4.png",
+    "alt": "Gane un taller con Bauker"
+  },
+  {
+    "nombre": "Banner CATALOGO AON PRO",
+    "href": "%%=RedirectTo(concat('https://sodimac.cl/sodimac-cl/content/catalogo-especialista-constructor-2025?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/catalogo-pro-v2.png",
+    "alt": "catalogo-especialista-constructor-2025"
   }
 ]
