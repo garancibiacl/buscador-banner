@@ -598,5 +598,17 @@
     "href": "https://www.sodimac.cl/static/bases/doble-acumulacion-cmr-puntos.pdf",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-doble-puntos-ces-v2.png",
     "alt": "Acumule el doble"
+  },
+  {
+    "nombre": "BANNER CMR PUNTOS - PAGUE MENOS - PRO",
+    "href": "https://www.cmrpuntos.cl/paga-menos",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/pague-menos-pro.jpg",
+    "alt": "Page Menos"
+  },
+  {
+    "nombre": "BANNER LANDING CHILE PINTA SHC",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/chile-pinta?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/06-banner-chilepinta.png",
+    "alt": "Chile Pintta"
   }
 ]
