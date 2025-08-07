@@ -610,5 +610,18 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/chile-pinta?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/06-banner-chilepinta.png",
     "alt": "Chile Pintta"
+  },
+  {
+    "nombre": "BANNER LANDING CHILE PINTA - PRO",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/chile-pinta?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/06-banner-chilepinta-pro.png",
+    "alt": "Chile Pintta"
+  },
+ 
+  {
+    "nombre": "BANNER 6 CSI CMR EN HERRAMIENTAS INALÁMBRICAS, BOMBAS CENTRÍFUGAS Y BOMBAS DE PISCINA",
+    "href": "https://www.sodimac.cl/static/bases/6csi-aonpro.pdf",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-6-cuotas-v3.png",
+    "alt": " 6 CSI CMR EN HERRAMIENTAS INALÁMBRICAS, BOMBAS CENTRÍFUGAS Y BOMBAS DE PISCINA"
   }
 ]
