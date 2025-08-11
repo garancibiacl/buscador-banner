@@ -584,7 +584,7 @@
   {
     "nombre": "BANNER - Concurso Taller Soñado de Bauker - PRO",
     "href": "https://www.sodimac.cl/static/bases/bl-taller-aonpro.pdf",
-    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-bauker-v4.png",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-bauker-v6.png",
     "alt": "Gane un taller con Bauker"
   },
   {
@@ -617,11 +617,16 @@
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/06-banner-chilepinta-pro.png",
     "alt": "Chile Pintta"
   },
- 
   {
     "nombre": "BANNER 6 CSI CMR EN HERRAMIENTAS INALÁMBRICAS, BOMBAS CENTRÍFUGAS Y BOMBAS DE PISCINA",
     "href": "https://www.sodimac.cl/static/bases/6csi-aonpro.pdf",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-6-cuotas-v3.png",
     "alt": " 6 CSI CMR EN HERRAMIENTAS INALÁMBRICAS, BOMBAS CENTRÍFUGAS Y BOMBAS DE PISCINA"
+  },
+  {
+    "nombre": "BANNER EL MEJOR MAESTRO CONVOCATORIA",
+    "href": "https://www.mejormaestro.cl",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-mejor-maestro.png",
+    "alt": "El mejor Maestro de chile"
   }
 ]
