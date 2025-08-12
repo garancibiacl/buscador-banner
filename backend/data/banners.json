@@ -634,5 +634,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/parrillas-proyecto-quinchos?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-landing-parrilla-2025.png",
     "alt": "El mejor Maestro de chile"
+  },
+  {
+    "nombre": "BANNER PRECIOS GARANTIZADOS - Cliente Profesiona",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/politica-de-precios-bajos?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/12-banner-precios-garantizado.png",
+    "alt": "Politica de precios bajos"
   }
 ]
