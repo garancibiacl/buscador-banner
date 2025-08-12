@@ -636,9 +636,15 @@
     "alt": "El mejor Maestro de chile"
   },
   {
-    "nombre": "BANNER PRECIOS GARANTIZADOS - Cliente Profesiona",
+    "nombre": "BANNER PRECIOS GARANTIZADOS - Cliente Profesional",
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/politica-de-precios-bajos?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/12-banner-precios-garantizado.png",
     "alt": "Politica de precios bajos"
+  },
+  {
+    "nombre": "BANNER LANDING AON PRO",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especialista-constructor?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-landing-pro.png",
+    "alt": "Especialista Constructor"
   }
 ]
