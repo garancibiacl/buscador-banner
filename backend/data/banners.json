@@ -632,7 +632,7 @@
   {
     "nombre": "BANNER LANDING PARRILLA SHC",
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/parrillas-proyecto-quinchos?',@prefix))=%%",
-    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-landing-parrilla-2025.png",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-landing-parrilla-2025-v1.png",
     "alt": "El mejor Maestro de chile"
   },
   {
