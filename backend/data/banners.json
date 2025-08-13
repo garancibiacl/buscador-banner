@@ -646,5 +646,11 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especialista-constructor?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-landing-pro.png",
     "alt": "Especialista Constructor"
+  },
+  {
+    "nombre": "BANNER Despacho gratis parrillas Mr. Beef - Hogar",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/seleccion/despacho-gratis-parrillas-mr-beef?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/mr-beef-banner.png",
+    "alt": "Despacho gratis parrillas"
   }
 ]
