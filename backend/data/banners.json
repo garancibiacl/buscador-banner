@@ -652,5 +652,35 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/seleccion/despacho-gratis-parrillas-mr-beef?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/mr-beef-banner.png",
     "alt": "Despacho gratis parrillas"
+  },
+  {
+    "nombre": "BANNER Armado de parrilla $9.990 CMR- Hogar",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/articulo/113680007/Armado-de-parrilla/113680009?exp=so_com&sid=SO_HO__396714?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-armado-parrilla.png",
+    "alt": "Armado-de-parrilla"
+  },
+  {
+    "nombre": "BANNER 3X2 EN CARBÓN MR BEEF CON CMR - Hogar",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/buscar?Ntt=281824+375063&',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/3x2-mr-beef-banner.png",
+    "alt": "3x2"
+  },
+  {
+    "nombre": "BANNER 6 CSI EN PARRILLAS DESDE $99.990",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat2079/Parrillas-y-accesorios?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-landing-parrilla-6csi-parrillas.png",
+    "alt": "Parrillas-y-accesorios"
+  },
+  {
+    "nombre": "BANNER 20% DE AHORRO CMR EN ESMALTE AL AGUA",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG12096/Esmaltes-al-Agua?facetSelected=true&f.product.brandName=ceresita%3A%3Akolor%3A%3Alanco%3A%3Asipa%3A%3Atopex?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/06-banner-chilepinta-20-ahorro-marcas.png",
+    "alt": "Esmaltes-al-Agua"
+  },
+  {
+    "nombre": "BANNER 6 CSI CMR PINTURAS, PISOS, BAÑOS Y COCINA",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat20792242/Pinturas?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/06-banner-chilepinta-6csi-piso-bano-cocina.png",
+    "alt": "Pinturas"
   }
 ]
