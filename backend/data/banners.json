@@ -682,5 +682,197 @@
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat20792242/Pinturas?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/06-banner-chilepinta-6csi-piso-bano-cocina.png",
     "alt": "Pinturas"
+  },
+   {
+    "nombre": "BANNER TAPA GOTERA 3X2",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/seleccion/3x2-en-tapagoteras?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/18-banner-tapagoteras-v02.png",
+    "alt": "BANNER 3X2-TAPAGOTERA"
+  },
+  {
+    "nombre": "BANNER DESPACHO GRATIS PISOS Y ADHESIVOS",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/static/bases/envio-sin-costo-en-pisos-adhesivos-modulos-tienda.pdf?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-despacho-gratis-v5.png",
+    "alt": "Ir a Bases ennvios sin costos"
+  },
+  {
+    "nombre": "BANNER LANDING CATALOGO PARRILLAS SHC",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/catalogo-parrillas-2025?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-landing-catalogo-parrilla.png",
+    "alt": "Ir a LANDING CATALOGO PARRILLAS"
+  },
+  {
+    "nombre": "Banner 70% en todo calefacción interior y Calientacamas Recco y Wurden (excluye Patio Heater)",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/seleccion/calefaccion70?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/BANNER-70-%20calefaccion-interior-Calientacamas-Recco-Wurden.png",
+    "alt": "Ir a calefaccion"
+  },
+  {
+    "nombre": "ARMADO DE PARRILA CAMBIO PRECIO",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/articulo/113680007/Armado-de-parrilla/113680009?exp=so_com&sid=SO_HO__396714?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-armado-parrilla-v2.png",
+    "alt": "Armado-de-parrilla"
+  },
+  {
+    "nombre": "Banner juegos en tienda - TALP",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tiendas-y-horarios-sodimac?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/09-Banner-juegos-en-tienda.png",
+    "alt": "tiendas-y-horarios"
+  },
+  {
+    "nombre": "Banner Foto familiar en tienda - TALP",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tiendas-y-horarios-sodimac?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/05-Banner-Foto-familiar-en-tienda.png",
+    "alt": "Ir a ver"
+  },
+  {
+    "nombre": "banner franke",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG10002/Griferias?facetSelected=true&f.product.brandName=franke&',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-franke.png",
+    "alt": "Ir a ver más"
+  },
+  {
+    "nombre": "banner tienda liqui",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tiendas-y-horarios-sodimac?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-liqui-tiendas-v2.png",
+    "alt": "Ir a ver más"
+  },
+  {
+    "nombre": "Banner - Despacho 2 horas, retiro en 90 min",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-hogar-despacho-2-horas.jpg",
+    "alt": "Ir a ver más"
+  },
+  {
+    "nombre": "Banner venta nocturna",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/seleccion/venta-nocturna-de-piscina?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-venta-nocturna-v04.png",
+    "alt": "Ir a ver más"
+  },
+  {
+    "nombre": "BANNER DINAMICO JARDIN FEST - HOGAR",
+    "href": "https://www.google.com/maps/place/Sodimac+Homecenter+Las+Condes/@-33.3801489,-70.5314853,17z/data=!3m1!4b1!4m6!3m5!1s0x9662c95509a10b25:0xda60ef1acecd0fff!8m2!3d-33.3801534!4d-70.5289104!16s%2Fg%2F11bbrjbxqq?entry=tts&g_ep=EgoyMDI1MTAwNi4wIPu8ASoASAFQAw%3D%3D&skid=96c4fe0b-e7f5-49df-8fa7-763c5551f954",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-jardin-fest-hogar-v03.png",
+    "alt": "Ir a ver más"
+  },
+  {
+    "nombre": "Banner - 6 CSI EN JUEGOS DE LIVING, COMEDOR, BAR, BALCÓN, QUITASOLES, TOLDOS Y PÉRGOLAS",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG10503/Terrazas?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-6cuotas-sin-interes.png",
+    "alt": "Ir a Terrazas"
+  },
+  {
+    "nombre": "Banner - 6 CUOTAS SIN INTERÉS EN MAQUINARIA DE JARDÍN",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat18320015/Maquinaria-de-jardin?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-6-cuotas-maquinaria-jardin-0.png",
+    "alt": "Ir a maquinaria jardin"
+  },
+  {
+    "nombre": "Catalogo impreso tiendas - Hogar",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tiendas-y-horarios-sodimac?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-catalogo-impreso-tiendas---Hogar.png",
+    "alt": "Ir a tiendas"
+  },
+  {
+    "nombre": "Banner revancha tienda - HOGAR",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tiendas-y-horarios-sodimac?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-revancha-tienda---HOGAR.png",
+    "alt": "Ir a tiendas"
+  },
+  {
+    "nombre": "LANDING JARDIN TERRAZA",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/mundo-aire-libre?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-landing-terraza.png",
+    "alt": "Ir a tiendas"
+  },
+  {
+    "nombre": "landing manito de gato",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/manito-de-gato?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-manito-gato-landing.png",
+    "alt": "Ir a especial"
+  },
+  {
+    "nombre": "Banner - POR COMPRAS SOBRE $29.990 EN JARDÍN CON CMR, LLEVE LA MANGUERA POCKET POR $6.990",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG10504/jardin?isLanding=true&cid=menu_380560?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-manguera.png",
+    "alt": "Ir a especial"
+  },
+  {
+    "nombre": "Banner - catalogo manito de gato",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/catalogo-manito-de-gato?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-catalogo-manito-de-gato.jpg",
+    "alt": "Ir a catalogo"
+  },
+  {
+    "nombre": "Banner - 2X1 GARANTIA EXTENDIDA MAQUINARIAS DE JARDIN",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat18320015/Maquinaria-de-jardin?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-2x1-garantia-extendida.png",
+    "alt": "Ir a 2x1"
+  },
+  {
+    "nombre": "Banner Guia navidad Segura- Hogar",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/guia-para-una-navidad-segura-y-sin-riesgos-en-casa?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-navidad-guia.jpg",
+    "alt": "Ir a guia navidad"
+  },
+  {
+    "nombre": "CONCURSO MANITO DE GATO",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tiendas-y-horarios-sodimac?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-concurso-manito-de-gato.png",
+    "alt": "Ir a revisar tiendas"
+  },
+  {
+    "nombre": "Landing Navidad - Hogar",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/especial-navidad?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-navidad-landing.jpg",
+    "alt": "Ir a landing"
+  },
+  {
+    "nombre": "BANNER el especialista",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/seleccion/especial-especialista?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/19-banner_especialista-0.png",
+    "alt": "BANNER El especialista"
+  },
+  {
+    "nombre": "BANNER concurso bauker-nueva url",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG10005/Ferreteria-y-construccion?facetSelected=true&f.derived.variant.sellerId=SODIMAC&',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-bauker-v6.png",
+    "alt": "Gane un taller con Bauker"
+  },
+  {
+    "nombre": "BANNER mudanza y embalaje",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG10165/Mudanza-y-Embalaje?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/25-banner-mudanza-embalaje.png",
+    "alt": "Ir a Mudanza-y-Embalaje"
+  },
+  {
+    "nombre": "BANNER - GUIA MAESTRA - PRO",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/articulo/143827614/GUIA-MAESTRA-2025-2026/143827616?exp=so_com?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/02-banner-guia-maestra-pro.png",
+    "alt": "Ir a GUIA MAESTRA"
+  },
+  {
+    "nombre": "Banner acciones 18 - PRO",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/content/tiendas-y-horarios-sodimac?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-acciones-18-pro-v2.png",
+    "alt": "Ir a Banner acciones 18 - PRO"
+  },
+  {
+    "nombre": "Banner Pro - Despacho 2 horas, retiro en 90 min",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-pro-despacho-90-min.jpg",
+    "alt": "Ir a ver más"
+  },
+  {
+    "nombre": "Banner Desayuno pro - VILLARICA (dinamico)",
+    "href": "https://www.google.cl/maps/place/Sodimac+Homecenter+Villarrica/@-39.2950186,-72.2163699,17z/data=!4m12!1m5!3m4!2zMznCsDE3JzQwLjgiUyA3MsKwMTInNTMuNiJX!8m2!3d-39.2946667!4d-72.2148889!3m5!1s0x9614621eeb5c6da9:0xab83de6d6203ee25!8m2!3d-39.2959167!4d-72.2150335!16s%2Fg%2F124ydd2kt?entry=ttu&g_ep=EgoyMDI1MTAwNy4wIKXMDSoASAFQAw%3D%3D",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-desayuno-dinamico-villarica.png",
+    "alt": "Ir a ver más"
+  },
+  {
+    "nombre": "Banner revancha tienda - Profesional",
+    "href": "https://www.sodimac.cl/sodimac-cl/content/tiendas-y-horarios-sodimac",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/Banner-revancha-tienda---PRO.png",
+    "alt": "Ir a ver más"
   }
 ]
