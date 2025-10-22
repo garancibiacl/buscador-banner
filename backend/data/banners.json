@@ -18,6 +18,12 @@
     "alt": "Ir a Decolovers"
   },
   {
+  "nombre": "6 CSI EN TODO HERRAMIENTAS Y MAQUINARIAS",
+  "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/seleccion/6-cuotas-sin-interes-cmr-herramienta-especialidad?',@prefix))=%%",
+  "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-herramientas-6csi.png",
+  "alt": "Ir a Herramientas Especializadas"
+},
+  {
     "nombre": "Banner Concurso Taller Ubermann - HOGAR",
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat8620074/Herramientas-y-maquinas?',@prefix))=%%",
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-uberman-hogar.png",
