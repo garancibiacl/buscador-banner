@@ -281,6 +281,18 @@
     "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-bano-pro.png",
     "alt": "Ir Muebles-de-Bano"
   },
+    {
+    "nombre": "Banner 6 CSI EN FOSAS Y ESTANQUES",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG10818/Fosas-y-estanques?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-estanque.png",
+    "alt": "Ir a Fosas-y-estanques"
+  },
+  {
+    "nombre": "Banner 6 CSI EN MOTORES DE PORTÓN",
+    "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/CATG10849/Porton-Entrada?',@prefix))=%%",
+    "img_src": "https://www.sodimac.cl/static/envioweb/2025/banners/images/banner-motores-de-porton.png",
+    "alt": "Ir a Porton-Entrada"
+  },
   {
     "nombre": "BANNER LINEA BLANCA",
     "href": "%%=RedirectTo(concat('https://www.sodimac.cl/sodimac-cl/lista/cat7090035/Linea-blanca?',@prefix))=%%",
